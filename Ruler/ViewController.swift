@@ -14,20 +14,21 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
     
+    private final let handler = StateHandler.init()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Set the view's delegate
         sceneView.delegate = self
-        
-        // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
-        
         // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        
+        let scene = SCNScene.init()
         // Set the scene to the view
         sceneView.scene = scene
+        
+        _ = self.handler.startState.add(view: self.view, sceneView: self.sceneView, handler: self.handler)
+        _ = self.handler.measuringState.add(view: self.view, sceneView: self.sceneView, handler: self.handler)
+        _ = self.handler.walkingState.add(view: self.view, sceneView: self.sceneView, handler: self.handler)
+        self.handler.currentState = self.handler.startState
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,6 +46,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Pause the view's session
         sceneView.session.pause()
+    }
+    
+    override final func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
+        self.handler.currentState.handleWillRotate()
+    }
+    
+    override final func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.handler.currentState.handleTouchesBegan()
     }
 
     // MARK: - ARSCNViewDelegate
