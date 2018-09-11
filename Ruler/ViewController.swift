@@ -24,6 +24,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let scene = SCNScene.init()
         // Set the scene to the view
         sceneView.scene = scene
+        sceneView.automaticallyUpdatesLighting = true
+        sceneView.autoenablesDefaultLighting = true
         
         _ = self.handler.startState.add(view: self.view, sceneView: self.sceneView, handler: self.handler)
         _ = self.handler.measuringState.add(view: self.view, sceneView: self.sceneView, handler: self.handler)

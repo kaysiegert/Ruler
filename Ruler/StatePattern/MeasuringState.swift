@@ -34,7 +34,10 @@ internal final class MeasuringState: State {
     private final func addPoint(at vector: SCNVector3) {
         _ = self.execute({ (_, sceneView, _) in
             let sphere = SCNBox.init(width: 0.005, height: 0.005, length: 0.005, chamferRadius: 0.002)
-            sphere.firstMaterial?.specular.contents = UIColor.red
+            sphere.firstMaterial?.diffuse.contents = UIColor.blue
+            sphere.firstMaterial?.specular.contents = UIColor.white
+            sphere.firstMaterial?.ambient.contents = UIColor.blue
+            sphere.firstMaterial?.lightingModel = SCNMaterial.LightingModel.phong
             let box = SCNNode.init(geometry: sphere)
             box.position = vector
             sceneView.scene.rootNode.addChildNode(box)
