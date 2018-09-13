@@ -17,15 +17,14 @@ internal final class StartState: State {
             view.addSubview(handler.targetImage)
             handler.bottomLabel.text = "Tap to start"
             
-            let spotLight = SCNNode()
-            spotLight.light = SCNLight()
-            spotLight.scale = SCNVector3(1,1,1)
-            spotLight.light?.intensity = 100000
-            //spotLight.castsShadow = true
-            spotLight.position = SCNVector3Zero
-            spotLight.light?.type = SCNLight.LightType.directional
-            spotLight.light?.color = UIColor.yellow
-            sceneView.scene.rootNode.addChildNode(spotLight)
+            let lightNode = SCNNode.init()
+            lightNode.light = SCNLight.init()
+            lightNode.light?.color = UIColor.white
+            lightNode.light?.intensity = 10
+            lightNode.light?.temperature = 300
+            lightNode.light?.type = SCNLight.LightType.probe
+            lightNode.position = SCNVector3Zero
+            sceneView.scene.rootNode.addChildNode(lightNode)
         })
     }
     
