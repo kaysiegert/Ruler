@@ -15,22 +15,12 @@ internal final class StartState: State {
         _ = self.execute({ (view, sceneView, handler) in
             view.addSubview(handler.bottomLabel)
             view.addSubview(handler.targetImage)
+            view.addSubview(handler.measuringModeSwitch)
+            view.addSubview(handler.workingModeSwitch)
             handler.bottomLabel.text = "Tap to start"
             
-            let lightNode = SCNNode.init()
-            lightNode.light = SCNLight.init()
-            lightNode.light?.color = UIColor.white
-            lightNode.light?.intensity = 10
-            lightNode.light?.temperature = 300
-            lightNode.light?.type = SCNLight.LightType.probe
-            lightNode.position = SCNVector3Zero
-            sceneView.scene.rootNode.addChildNode(lightNode)
+            handler.currentState = handler.walkingState
         })
     }
-    
-    override internal final func handleTouchesBegan() {
-        _ = self.execute({ (_, _, handler) in
-            handler.currentState = handler.measuringState
-        })
-    }
+
 }

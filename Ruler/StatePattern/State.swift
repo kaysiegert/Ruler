@@ -51,6 +51,7 @@ internal class State {
     internal func handleWillRotate() {
         self.locateBottomLabel()
         self.locateTargetImage()
+        self.locateMeasureModeSwitch()
     }
     
     private final func locateBottomLabel() {
@@ -70,6 +71,29 @@ internal class State {
             handler.targetImage.center.x = view.center.y
             handler.targetImage.center.y = view.center.x
         })
+    }
+    
+    private final func locateMeasureModeSwitch() {
+        _ = self.execute({ (view, _, handler) in
+            handler.measuringModeSwitch.center.x = view.center.y
+            switch UIDevice.current.orientation {
+            case .faceDown, .faceUp, .portrait, .portraitUpsideDown:
+                handler.measuringModeSwitch.center.y = view.frame.width - handler.measuringModeSwitch.frame.height / 2 - 20
+            case .landscapeLeft, .landscapeRight, .unknown:
+                handler.measuringModeSwitch.center.y = view.frame.width - handler.measuringModeSwitch.frame.height / 2 - 10
+            }
+        })
+    }
+    
+    internal final var currentLight: ARLightEstimate? {
+        var estimate: ARLightEstimate? = nil
+        _ = self.execute({ (_, sceneViewTmp, _) in
+            guard let lightEstimate = sceneViewTmp.session.currentFrame?.lightEstimate else {
+                return
+            }
+            estimate = lightEstimate
+        })
+        return estimate
     }
 }
 

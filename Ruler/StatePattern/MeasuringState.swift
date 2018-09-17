@@ -33,7 +33,7 @@ internal final class MeasuringState: State {
     
     private final func addPoint(at vector: SCNVector3) {
         _ = self.execute({ (_, sceneView, _) in
-            let boxGeo = SCNSphere.init(radius: 0.02)
+            let boxGeo = SCNSphere.init(radius: 0.01)
             boxGeo.firstMaterial?.diffuse.contents = UIColor.orange
             let box = SCNNode.init(geometry: boxGeo)
             box.position = vector
@@ -54,7 +54,7 @@ internal final class MeasuringState: State {
         self.startVector = nil
     }
     
-    override final func handleTouchesBegan() {
+    override internal final func handleTouchesBegan() {
         _ = self.execute({ (view, sceneView, handler) in
             guard let startValue = self.startVector else {
                 //: Es muss zunächst ein Startwert ermittelt werden
@@ -69,6 +69,9 @@ internal final class MeasuringState: State {
             self.printDistance(with: startValue.distanceFromPos(pos: endValue))
             //: Linie mit Distanz zeichnen
             self.addPoint(at: endValue)
+            _ = self.execute({ (_, sceneView, _) in
+                sceneView.scene.rootNode.addChildNode(SCNNode.createLine(from: startValue, to: endValue, with: UIColor.orange))
+            })
             handler.currentState = handler.walkingState
         })
     }

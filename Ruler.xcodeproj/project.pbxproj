@@ -25,6 +25,11 @@
 		C61BEB3F2147E1410042EE12 /* StateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61BEB3E2147E1410042EE12 /* StateHandler.swift */; };
 		C61BEB452147F1110042EE12 /* PlaneDetector.mm in Sources */ = {isa = PBXBuildFile; fileRef = C61BEB442147F1110042EE12 /* PlaneDetector.mm */; };
 		C61BEB472147F12A0042EE12 /* ARHitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61BEB462147F12A0042EE12 /* ARHitTest.swift */; };
+		C6911862214F964A00553624 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6911861214F964A00553624 /* World.swift */; };
+		C6911864214F9C9C00553624 /* MeasuringState2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6911863214F9C9C00553624 /* MeasuringState2.swift */; };
+		C6911867214FA9D600553624 /* UISegementedControl Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6911866214FA9D600553624 /* UISegementedControl Extension.swift */; };
+		C691186A214FAE3C00553624 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6911869214FAE3C00553624 /* SegmentedControl.swift */; };
+		C69118AA214FDCA400553624 /* SCNNode Extennsion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69118A9214FDCA400553624 /* SCNNode Extennsion.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +79,11 @@
 		C61BEB442147F1110042EE12 /* PlaneDetector.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlaneDetector.mm; sourceTree = "<group>"; };
 		C61BEB462147F12A0042EE12 /* ARHitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARHitTest.swift; sourceTree = "<group>"; };
 		C61BEB482147F3260042EE12 /* PlaneDetector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaneDetector.h; sourceTree = "<group>"; };
+		C6911861214F964A00553624 /* World.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
+		C6911863214F9C9C00553624 /* MeasuringState2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasuringState2.swift; sourceTree = "<group>"; };
+		C6911866214FA9D600553624 /* UISegementedControl Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegementedControl Extension.swift"; sourceTree = "<group>"; };
+		C6911869214FAE3C00553624 /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
+		C69118A9214FDCA400553624 /* SCNNode Extennsion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNNode Extennsion.swift"; sourceTree = "<group>"; };
 		CC91902F2A57D709A05F4421 /* Pods_RulerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RulerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD6A3204AAE23CBD9C6D4822 /* Pods_RulerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RulerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9220FCB4DA88A232550BBAD /* Pods_Ruler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ruler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,6 +165,9 @@
 		C61BEAFB2147BDBD0042EE12 /* Ruler */ = {
 			isa = PBXGroup;
 			children = (
+				C6911868214FAE1900553624 /* UIParts */,
+				C6911865214FA9C200553624 /* Useful Extension */,
+				C6911860214F962D00553624 /* WorldModel */,
 				C61BEB402147F0AB0042EE12 /* MeasureLogic */,
 				C61BEB2C2147C8BB0042EE12 /* StatePattern */,
 				C61BEAFC2147BDBD0042EE12 /* AppDelegate.swift */,
@@ -193,6 +206,7 @@
 				C61BEB2F2147C92C0042EE12 /* StartState.swift */,
 				C61BEB382147CA5A0042EE12 /* WalkingState.swift */,
 				C61BEB3A2147CEC60042EE12 /* MeasuringState.swift */,
+				C6911863214F9C9C00553624 /* MeasuringState2.swift */,
 				C61BEB3E2147E1410042EE12 /* StateHandler.swift */,
 			);
 			path = StatePattern;
@@ -207,6 +221,31 @@
 				C61BEB482147F3260042EE12 /* PlaneDetector.h */,
 			);
 			path = MeasureLogic;
+			sourceTree = "<group>";
+		};
+		C6911860214F962D00553624 /* WorldModel */ = {
+			isa = PBXGroup;
+			children = (
+				C6911861214F964A00553624 /* World.swift */,
+			);
+			path = WorldModel;
+			sourceTree = "<group>";
+		};
+		C6911865214FA9C200553624 /* Useful Extension */ = {
+			isa = PBXGroup;
+			children = (
+				C6911866214FA9D600553624 /* UISegementedControl Extension.swift */,
+				C69118A9214FDCA400553624 /* SCNNode Extennsion.swift */,
+			);
+			path = "Useful Extension";
+			sourceTree = "<group>";
+		};
+		C6911868214FAE1900553624 /* UIParts */ = {
+			isa = PBXGroup;
+			children = (
+				C6911869214FAE3C00553624 /* SegmentedControl.swift */,
+			);
+			path = UIParts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -414,12 +453,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C69118AA214FDCA400553624 /* SCNNode Extennsion.swift in Sources */,
 				C61BEB392147CA5A0042EE12 /* WalkingState.swift in Sources */,
 				C61BEB3F2147E1410042EE12 /* StateHandler.swift in Sources */,
 				C61BEB452147F1110042EE12 /* PlaneDetector.mm in Sources */,
+				C6911867214FA9D600553624 /* UISegementedControl Extension.swift in Sources */,
 				C61BEB012147BDBD0042EE12 /* ViewController.swift in Sources */,
+				C6911864214F9C9C00553624 /* MeasuringState2.swift in Sources */,
+				C6911862214F964A00553624 /* World.swift in Sources */,
 				C61BEAFD2147BDBD0042EE12 /* AppDelegate.swift in Sources */,
 				C61BEB302147C92C0042EE12 /* StartState.swift in Sources */,
+				C691186A214FAE3C00553624 /* SegmentedControl.swift in Sources */,
 				C61BEB472147F12A0042EE12 /* ARHitTest.swift in Sources */,
 				C61BEB2E2147C8CC0042EE12 /* State.swift in Sources */,
 				C61BEB3B2147CEC60042EE12 /* MeasuringState.swift in Sources */,
