@@ -23,7 +23,7 @@ internal final class MeasuringState2: State {
             }
             var translation = matrix_identity_float4x4
             // 20cm in front of the camera
-            translation.columns.3.z = -0.2
+            translation.columns.3.z = -0.0 
             let transform = simd_mul(currentFrame.camera.transform, translation)
             result = SCNVector3.init(transform.columns.3.x, transform.columns.3.y, transform.columns.3.z)
         })
