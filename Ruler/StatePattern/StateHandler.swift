@@ -63,7 +63,7 @@ internal final class StateHandler {
         })
         label.layer.masksToBounds = true
         label.layer.cornerRadius = 30
-        label.textAlignment = .center
+        label.textAlignment = NSTextAlignment.center
         return label
     }()
     
@@ -90,22 +90,6 @@ internal final class StateHandler {
             control.center.x = view.center.x
             control.center.y = view.frame.height - control.frame.height / 2 - 20
         })
-        return control
-    }()
-    
-    internal lazy var workingModeSwitch: SegmentedControl = {
-        let control = SegmentedControl.init(frame: CGRect.init(x: 0, y: 0, width: 250, height: 35)
-            , text: "Measure", "Select")
-        control.tintColor = .white
-        control.backgroundColor = .clear
-        control.layer.masksToBounds = true
-        control.layer.cornerRadius = 30
-        control.removeBorders()
-        _ = self.currentState.execute({ (view, _, _) in
-            control.center.x = view.center.x
-            control.center.y = view.frame.height - control.frame.height / 2 - 105
-        })
-        control.isEnabled = false
         return control
     }()
 }

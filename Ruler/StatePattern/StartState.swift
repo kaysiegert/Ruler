@@ -16,7 +16,6 @@ internal final class StartState: State {
             view.addSubview(handler.bottomLabel)
             view.addSubview(handler.targetImage)
             view.addSubview(handler.measuringModeSwitch)
-            view.addSubview(handler.workingModeSwitch)
             handler.bottomLabel.text = "Tap to start"
             
             handler.currentState = handler.walkingState

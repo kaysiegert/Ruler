@@ -29,7 +29,8 @@
 		C6911864214F9C9C00553624 /* MeasuringState2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6911863214F9C9C00553624 /* MeasuringState2.swift */; };
 		C6911867214FA9D600553624 /* UISegementedControl Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6911866214FA9D600553624 /* UISegementedControl Extension.swift */; };
 		C691186A214FAE3C00553624 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6911869214FAE3C00553624 /* SegmentedControl.swift */; };
-		C69118AA214FDCA400553624 /* SCNNode Extennsion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69118A9214FDCA400553624 /* SCNNode Extennsion.swift */; };
+		C69118AA214FDCA400553624 /* SCNNode Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69118A9214FDCA400553624 /* SCNNode Extension.swift */; };
+		C6B8972721510FD2006F5EC0 /* ARSCNView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B8972621510FD2006F5EC0 /* ARSCNView Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,7 +84,8 @@
 		C6911863214F9C9C00553624 /* MeasuringState2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasuringState2.swift; sourceTree = "<group>"; };
 		C6911866214FA9D600553624 /* UISegementedControl Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegementedControl Extension.swift"; sourceTree = "<group>"; };
 		C6911869214FAE3C00553624 /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
-		C69118A9214FDCA400553624 /* SCNNode Extennsion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNNode Extennsion.swift"; sourceTree = "<group>"; };
+		C69118A9214FDCA400553624 /* SCNNode Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNNode Extension.swift"; sourceTree = "<group>"; };
+		C6B8972621510FD2006F5EC0 /* ARSCNView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARSCNView Extension.swift"; sourceTree = "<group>"; };
 		CC91902F2A57D709A05F4421 /* Pods_RulerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RulerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD6A3204AAE23CBD9C6D4822 /* Pods_RulerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RulerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9220FCB4DA88A232550BBAD /* Pods_Ruler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ruler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -235,7 +237,8 @@
 			isa = PBXGroup;
 			children = (
 				C6911866214FA9D600553624 /* UISegementedControl Extension.swift */,
-				C69118A9214FDCA400553624 /* SCNNode Extennsion.swift */,
+				C69118A9214FDCA400553624 /* SCNNode Extension.swift */,
+				C6B8972621510FD2006F5EC0 /* ARSCNView Extension.swift */,
 			);
 			path = "Useful Extension";
 			sourceTree = "<group>";
@@ -453,7 +456,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C69118AA214FDCA400553624 /* SCNNode Extennsion.swift in Sources */,
+				C69118AA214FDCA400553624 /* SCNNode Extension.swift in Sources */,
 				C61BEB392147CA5A0042EE12 /* WalkingState.swift in Sources */,
 				C61BEB3F2147E1410042EE12 /* StateHandler.swift in Sources */,
 				C61BEB452147F1110042EE12 /* PlaneDetector.mm in Sources */,
@@ -464,6 +467,7 @@
 				C61BEAFD2147BDBD0042EE12 /* AppDelegate.swift in Sources */,
 				C61BEB302147C92C0042EE12 /* StartState.swift in Sources */,
 				C691186A214FAE3C00553624 /* SegmentedControl.swift in Sources */,
+				C6B8972721510FD2006F5EC0 /* ARSCNView Extension.swift in Sources */,
 				C61BEB472147F12A0042EE12 /* ARHitTest.swift in Sources */,
 				C61BEB2E2147C8CC0042EE12 /* State.swift in Sources */,
 				C61BEB3B2147CEC60042EE12 /* MeasuringState.swift in Sources */,

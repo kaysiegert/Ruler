@@ -67,12 +67,7 @@ internal final class MeasuringState2: State {
     private final func addPoint(at vector: SCNVector3) -> SCNNode {
         var result = SCNNode.init()
         _ = self.execute({ (_, sceneView, _) in
-            let boxGeo = SCNSphere.init(radius: 0.01)
-            boxGeo.firstMaterial?.diffuse.contents = UIColor.green
-            let box = SCNNode.init(geometry: boxGeo)
-            box.position = vector
-            sceneView.scene.rootNode.addChildNode(box)
-            result = box
+            result = sceneView.addMeasurepoint(at: vector, color: .green, type: .dynamic)
         })
         return result
     }
@@ -106,7 +101,7 @@ internal final class MeasuringState2: State {
         self.endNode = nil
     }
     
-    override internal final func handleTouchesBegan() {
+    override internal final func handleTouchesBegan(at point: CGPoint) {
         guard let newPosition = self.getCurrentPosition() else {
             if self.startPosition == nil {
                 _ = self.execute({ (_, _, handler) in
@@ -121,10 +116,10 @@ internal final class MeasuringState2: State {
             self.startPosition = newPosition
             return
         }
-        _ = self.addPoint(at: newPosition)
         let distance = newPosition.distanceFromPos(pos: startValue)
         self.addDistanceNode(at: newPosition, with: distance)
         _ = self.execute({ (_, sceneView, _) in
+            sceneView.addMeasurepoint(at: newPosition, color: .green, type: .dynamic)
             sceneView.scene.rootNode.addChildNode(SCNNode.createLine(from: startValue, to: newPosition, with: UIColor.green))
         })
         self.printDistance(with: distance)

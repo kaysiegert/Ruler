@@ -13,40 +13,82 @@ import ARKit
 internal final class MeasuringState: State {
     
     private var startVector: SCNVector3? = nil
-    private final var timer: Timer
+    private final var timer: Timer = Timer.init()
     
-    override init(with view: UIView? = nil, sceneView: ARSCNView? = nil, handler: StateHandler? = nil) {
-        self.timer = Timer.init()
-        super.init(with: view, sceneView: sceneView, handler: handler)
-    }
-    
-    private final func getStartValue() {
+    private final func handleMeasureSituation() {
         _ = self.execute({ (view, sceneView, handler) in
-            guard let result = sceneView.worldPositionFromScreenPosition(view.center, objectPos: nil).position else {
-                handler.bottomLabel.text = "Fehlgeschlagen\nBitte erneut versuchen"
+            
+            guard let startValue = self.startVector else {
+                
+                //: Funktion welche während der Messung aufgerufen wird
+                func initMeasurment(with startValue: SCNVector3) {
+                    
+                    func getCurrentPosition() -> SCNVector3? {
+                        guard let knownNode = sceneView.getNode(for: view.center), knownNode.name == "MeasurePoint" else {
+                            //: Startpunkt über Hittest finden
+                            guard let newVector = sceneView.worldPositionFromScreenPosition(view.center, objectPos: nil).position else {
+                                //: kein Wert konnte ermittelt werden --> zurück und fehlschlag anzeigen
+                                return nil
+                            }
+                            //: ein Startpunkt konnte ermittelt werden
+                            return newVector
+                        }
+                        return knownNode.position
+                    }
+                    
+                    self.startVector = startValue
+                    self.timer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true, block: { (_) in
+                        _ = self.execute({ (_, _, handler) in
+                            guard let startValue = self.startVector, let currentValue = getCurrentPosition() else {
+                                return
+                            }
+                            self.printDistance(with: startValue.distanceFromPos(pos: currentValue))
+                        })
+                    })
+                }
+                
+                //: es wurde kein Startpunkt gesetzt --> es muss zunächst der Startpunkt ermittelt werden
+                guard let knownNode = sceneView.getNode(for: view.center), knownNode.name == "MeasurePoint" else {
+                    //: Startpunkt über Hittest finden
+                    guard let newVector = sceneView.worldPositionFromScreenPosition(view.center, objectPos: nil).position else {
+                        //: kein Wert konnte ermittelt werden --> zurück und fehlschlag anzeigen
+                        handler.bottomLabel.text = "Fehlgeschlagen\nBitte erneut versuchen"
+                        return
+                    }
+                    //: ein Startpunkt konnte ermittelt werden
+                    _ = sceneView.addMeasurepoint(at: newVector, color: .orange, type: .static)
+                    initMeasurment(with: newVector)
+                    return
+                }
+                //: es wurde auf eine bekannte Node gezielt
+                initMeasurment(with: knownNode.position)
                 return
             }
-            self.startVector = result
-            self.addPoint(at: result)
-        })
-    }
-    
-    private final func addPoint(at vector: SCNVector3) {
-        _ = self.execute({ (_, sceneView, _) in
-            let boxGeo = SCNSphere.init(radius: 0.01)
-            boxGeo.firstMaterial?.diffuse.contents = UIColor.orange
-            let box = SCNNode.init(geometry: boxGeo)
-            box.position = vector
-            sceneView.scene.rootNode.addChildNode(box)
+            
+            //: ein Startpunkt ist bekannt --> Endpunkt ermitteln
+            guard let knownNode = sceneView.getNode(for: view.center) else {
+                //: Endpunkt über Hittest finden
+                guard let newVector = sceneView.worldPositionFromScreenPosition(view.center, objectPos: nil).position else {
+                    //: kein Wert konnte ermittelt werden --> zurück
+                    return
+                }
+                //: ein Endpunkt konnte ermittelt werden
+                _ = sceneView.addMeasurepoint(at: newVector, color: .orange, type: .static)
+                _ = sceneView.addLine(from: startValue, to: newVector, with: .orange)
+                self.printDistance(with: startValue.distanceFromPos(pos: newVector))
+                handler.currentState = handler.walkingState
+                return
+            }
+            //: es wurde auf eine bekannte Node gezielt
+            _ = sceneView.addLine(from: startValue, to: knownNode.position, with: .orange)
+            self.printDistance(with: startValue.distanceFromPos(pos: knownNode.position))
+            handler.currentState = handler.walkingState
         })
     }
     
     override func initState() {
         print("MeasuringState")
-        self.getStartValue()
-        self.timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { (_) in
-            self.handleUpdate()
-        })
+        self.handleMeasureSituation()
     }
     
     override final func deinitState() {
@@ -54,46 +96,19 @@ internal final class MeasuringState: State {
         self.startVector = nil
     }
     
-    override internal final func handleTouchesBegan() {
-        _ = self.execute({ (view, sceneView, handler) in
-            guard let startValue = self.startVector else {
-                //: Es muss zunächst ein Startwert ermittelt werden
-                self.getStartValue()
+    override internal final func handleTouchesBegan(at point: CGPoint) {
+        _ = self.execute({ (_, sceneView, _) in
+            guard let knownNode = sceneView.getNode(for: point), knownNode.name == "MeasurePoint" else {
+                self.handleMeasureSituation()
                 return
             }
-            //: Endwert bestimmen
-            guard let endValue = sceneView.worldPositionFromScreenPosition(view.center, objectPos: nil).position else {
-                handler.bottomLabel.text = "Fehlgeschlagen\nBitte erneut versuchen"
-                return
-            }
-            self.printDistance(with: startValue.distanceFromPos(pos: endValue))
-            //: Linie mit Distanz zeichnen
-            self.addPoint(at: endValue)
-            _ = self.execute({ (_, sceneView, _) in
-                sceneView.scene.rootNode.addChildNode(SCNNode.createLine(from: startValue, to: endValue, with: UIColor.orange))
-            })
-            handler.currentState = handler.walkingState
+            knownNode.geometry?.firstMaterial?.diffuse.contents = UIColor.red
         })
     }
     
     private final func printDistance(with value: Float) {
         _ = self.execute({ (_, _, handler) in
             handler.bottomLabel.text = "\((roundf(value * 10000)) / 100) cm"
-        })
-    }
-    
-    override func handleUpdate() {
-        _ = self.execute({ (view, sceneView, handler) in
-            if let startValue = self.startVector {
-                if let endValue = sceneView.worldPositionFromScreenPosition(view.center, objectPos: nil).position {
-                    let distance = startValue.distanceFromPos(pos: endValue)
-                    self.printDistance(with: distance)
-                } else {
-                    handler.bottomLabel.text = "Keine Werte"
-                }
-            } else {
-                handler.bottomLabel.text = "Fehlgeschlagen\nBitte erneut versuchen"
-            }
         })
     }
 }

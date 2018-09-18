@@ -56,7 +56,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     override final func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.handler.currentState.handleTouchesBegan()
+        guard let touchLocation = touches.first else {
+            return
+        }
+        let touchPoint = touchLocation.location(in: self.view)
+        self.handler.currentState.handleTouchesBegan(at: touchPoint)
     }
 
     // MARK: - ARSCNViewDelegate

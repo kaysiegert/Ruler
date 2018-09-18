@@ -14,11 +14,10 @@ internal final class WalkingState: State {
         print("WalkingState")
         _ = self.execute({ (_, _, handler) in
             handler.measuringModeSwitch.appear()
-            handler.workingModeSwitch.appear()
         })
     }
     
-    override final func handleTouchesBegan() {
+    override final func handleTouchesBegan(at point: CGPoint) {
         _ = self.execute({ (_, _, handler) in
             switch handler.measuringModeSwitch.selectedSegmentIndex {
             case 0:
@@ -34,7 +33,6 @@ internal final class WalkingState: State {
     override final func deinitState() {
         _ = self.execute({ (_, _, handler) in
             handler.measuringModeSwitch.disappear()
-            handler.workingModeSwitch.disappear()
         })
     }
 }
