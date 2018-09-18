@@ -31,6 +31,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         _ = self.handler.measuringState.add(view: self.view, sceneView: self.sceneView, handler: self.handler)
         _ = self.handler.walkingState.add(view: self.view, sceneView: self.sceneView, handler: self.handler)
         _ = self.handler.measuringState2.add(view: self.view, sceneView: self.sceneView, handler: self.handler)
+        _ = self.handler.settingState.add(view: self.view, sceneView: self.sceneView, handler: self.handler)
         self.handler.currentState = self.handler.startState
     }
     
@@ -62,7 +63,30 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let touchPoint = touchLocation.location(in: self.view)
         self.handler.currentState.handleTouchesBegan(at: touchPoint)
     }
+    
+    override final func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touchLocation = touches.first else {
+            return
+        }
+        let touchPoint = touchLocation.location(in: self.view)
+        self.handler.currentState.handleTouchesMoved(at: touchPoint)
+    }
+    
+    override final func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touchLocation = touches.first else {
+            return
+        }
+        let touchPoint = touchLocation.location(in: self.view)
+        self.handler.currentState.handleTouchesEnded(at: touchPoint)
+    }
 
+    override final func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touchLocation = touches.first else {
+            return
+        }
+        let touchPoint = touchLocation.location(in: self.view)
+        self.handler.currentState.handleTouchesEnded(at: touchPoint)
+    }
     // MARK: - ARSCNViewDelegate
 
 }

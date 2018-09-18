@@ -8,6 +8,9 @@
 
 import Foundation
 
+var settingNode: Int = 0
+var world = [(SCNNode, [SCNNode])].init()
+
 internal final class WalkingState: State {
     
     override final func initState() {
@@ -18,15 +21,26 @@ internal final class WalkingState: State {
     }
     
     override final func handleTouchesBegan(at point: CGPoint) {
-        _ = self.execute({ (_, _, handler) in
-            switch handler.measuringModeSwitch.selectedSegmentIndex {
-            case 0:
-                handler.currentState = handler.measuringState
-            case 1:
-                handler.currentState = handler.measuringState2
-            default:
-                print("Switch Error")
+        _ = self.execute({ (_, sceneView, handler) in
+            guard let knownNode = sceneView.getNode(for: point), knownNode.name == "MeasurePoint" else {
+                switch handler.measuringModeSwitch.selectedSegmentIndex {
+                case 0:
+                    handler.currentState = handler.measuringState
+                case 1:
+                    handler.currentState = handler.measuringState2
+                default:
+                    print("Switch Error")
+                }
+                return
             }
+            //: Go to SettingState
+            guard let settingNodeIndex = world.firstIndex(where: { (node,_) -> Bool in
+                return node == knownNode
+            }) else {
+                return
+            }
+            settingNode = settingNodeIndex
+            handler.currentState = handler.settingState
         })
     }
     

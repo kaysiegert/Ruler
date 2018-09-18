@@ -12,7 +12,7 @@ import ARKit
 internal final class MeasuringState2: State {
     
     private final var timer = Timer.init()
-    private final var startPosition: SCNVector3? = nil
+    private final var startNode: SCNNode? = nil
     private final var endNode: SCNNode? = nil
     
     private final func getCurrentPosition() -> SCNVector3? {
@@ -23,7 +23,7 @@ internal final class MeasuringState2: State {
             }
             var translation = matrix_identity_float4x4
             // 20cm in front of the camera
-            translation.columns.3.z = -0.0 
+            translation.columns.3.z = -0.0
             let transform = simd_mul(currentFrame.camera.transform, translation)
             result = SCNVector3.init(transform.columns.3.x, transform.columns.3.y, transform.columns.3.z)
         })
@@ -39,18 +39,17 @@ internal final class MeasuringState2: State {
     override internal final func initState() {
         print("MeasuringState2")
         self.endNode = nil
-        self.startPosition = nil
+        self.startNode = nil
         guard let newPosition = self.getCurrentPosition() else {
             _ = self.execute({ (_, _, handler) in
                 handler.bottomLabel.text = "Fehlgeschlagen"
             })
             return
         }
-        self.startPosition = newPosition
-        _ = self.addPoint(at: newPosition)
+        self.startNode = self.addPoint(at: newPosition)
         
         self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (_) in
-            guard let safeStart = self.startPosition, let endValue = self.getCurrentPosition() else {
+            guard let safeStart = self.startNode, let endValue = self.getCurrentPosition() else {
                 return
             }
             
@@ -62,7 +61,7 @@ internal final class MeasuringState2: State {
                     self.endNode = sceneView.addMeasurepoint(at: endValue, color: .green, type: .dynamic)
                 })
             }
-            self.printDistance(with: safeStart.distanceFromPos(pos: endValue))
+            self.printDistance(with: safeStart.position.distanceFromPos(pos: endValue))
         })
     }
     
@@ -98,14 +97,14 @@ internal final class MeasuringState2: State {
     
     override internal final func deinitState() {
         self.timer.invalidate()
-        self.startPosition = nil
+        self.startNode = nil
         self.endNode?.removeFromParentNode()
         self.endNode = nil
     }
     
     override internal final func handleTouchesBegan(at point: CGPoint) {
         guard let newPosition = self.getCurrentPosition() else {
-            if self.startPosition == nil {
+            if self.startNode == nil {
                 _ = self.execute({ (_, _, handler) in
                     handler.bottomLabel.text = "Fehlgeschlagen"
                 })
@@ -113,16 +112,15 @@ internal final class MeasuringState2: State {
             return
         }
         
-        guard let startValue = self.startPosition else {
-            _ = self.addPoint(at: newPosition)
-            self.startPosition = newPosition
+        guard let startValue = self.startNode else {
+            self.startNode = self.addPoint(at: newPosition)
             return
         }
-        let distance = newPosition.distanceFromPos(pos: startValue)
+        let distance = newPosition.distanceFromPos(pos: startValue.position)
         //self.addDistanceNode(at: newPosition, with: distance)
         _ = self.execute({ (_, sceneView, _) in
-            _ = sceneView.addMeasurepoint(at: newPosition, color: .green, type: .static)
-            _ = sceneView.addLine(from: startValue, to: newPosition, with: .green)
+            let endPoint = sceneView.addMeasurepoint(at: newPosition, color: .green, type: .static)
+            _ = sceneView.addLine(startPoint: startValue, endPoint: endPoint, from: startValue.position, to: newPosition, with: .green)
         })
         self.printDistance(with: distance)
         _ = self.execute({ (_, _, handler) in

@@ -36,7 +36,7 @@ internal extension ARSCNView {
         return sphere
     }
     
-    internal final func addLine(from startPosition: SCNVector3, to endPosition: SCNVector3, with color: UIColor) -> SCNNode {
+    internal final func addLine(startPoint: SCNNode, endPoint: SCNNode, from startPosition: SCNVector3, to endPosition: SCNVector3, with color: UIColor) -> SCNNode {
         let distance = startPosition.distanceFromPos(pos: endPosition)
         let lineGeo = SCNCylinder.init(radius: 0.002, height: CGFloat(distance))
         lineGeo.firstMaterial?.diffuse.contents = color
@@ -89,6 +89,33 @@ internal extension ARSCNView {
         line.transform.m44 = 1.0
         
         self.scene.rootNode.addChildNode(line)
+        
+        //: Adding Linenodes to the world
+        if let concreteStartPoint = world.firstIndex(where: { (node, _) -> Bool in
+            return node == startPoint
+        }) {
+            //: Node kommt vor --> line hinzufügen
+            var newConnections = world[concreteStartPoint].1
+            newConnections.append(line)
+            world[concreteStartPoint] = (world[concreteStartPoint].0, newConnections)
+        } else {
+            //: Node kommt noch nicht vor
+            world.append((startPoint, [line]))
+        }
+        
+        //: Adding Linenodes to the world
+        if let concreteEndPoint = world.firstIndex(where: { (node, _) -> Bool in
+            return node == endPoint
+        }) {
+            //: Node kommt vor --> line hinzufügen
+            var newConnections = world[concreteEndPoint].1
+            newConnections.append(line)
+            world[concreteEndPoint] = (world[concreteEndPoint].0, newConnections)
+        } else {
+            //: Node kommt noch nicht vor
+            world.append((endPoint, [line]))
+        }
+        
         return line
     }
 }

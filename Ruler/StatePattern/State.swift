@@ -46,6 +46,8 @@ internal class State {
     
     internal func handleUpdate() {}
     internal func handleTouchesBegan(at point: CGPoint) {}
+    internal func handleTouchesMoved(at point: CGPoint) {}
+    internal func handleTouchesEnded(at point: CGPoint) {}
     
     internal func handleDidRotate() {}
     internal func handleWillRotate() {

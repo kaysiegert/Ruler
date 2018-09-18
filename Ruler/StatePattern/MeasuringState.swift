@@ -12,16 +12,16 @@ import ARKit
 
 internal final class MeasuringState: State {
     
-    private var startVector: SCNVector3? = nil
+    private var startNode: SCNNode? = nil
     private final var timer: Timer = Timer.init()
     
     private final func handleMeasureSituation() {
         _ = self.execute({ (view, sceneView, handler) in
             
-            guard let startValue = self.startVector else {
+            guard let startValue = self.startNode else {
                 
                 //: Funktion welche während der Messung aufgerufen wird
-                func initMeasurment(with startValue: SCNVector3) {
+                func initMeasurment(with startValue: SCNNode) {
                     
                     func getCurrentPosition() -> SCNVector3? {
                         guard let knownNode = sceneView.getNode(for: view.center), knownNode.name == "MeasurePoint" else {
@@ -36,13 +36,13 @@ internal final class MeasuringState: State {
                         return knownNode.position
                     }
                     
-                    self.startVector = startValue
+                    self.startNode = startValue
                     self.timer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true, block: { (_) in
                         _ = self.execute({ (_, _, handler) in
-                            guard let startValue = self.startVector, let currentValue = getCurrentPosition() else {
+                            guard let startValue = self.startNode, let currentValue = getCurrentPosition() else {
                                 return
                             }
-                            self.printDistance(with: startValue.distanceFromPos(pos: currentValue))
+                            self.printDistance(with: startValue.position.distanceFromPos(pos: currentValue))
                         })
                     })
                 }
@@ -56,12 +56,12 @@ internal final class MeasuringState: State {
                         return
                     }
                     //: ein Startpunkt konnte ermittelt werden
-                    _ = sceneView.addMeasurepoint(at: newVector, color: .orange, type: .static)
-                    initMeasurment(with: newVector)
+                    let startPoint = sceneView.addMeasurepoint(at: newVector, color: .orange, type: .static)
+                    initMeasurment(with: startPoint)
                     return
                 }
                 //: es wurde auf eine bekannte Node gezielt
-                initMeasurment(with: knownNode.position)
+                initMeasurment(with: knownNode)
                 return
             }
             
@@ -73,15 +73,15 @@ internal final class MeasuringState: State {
                     return
                 }
                 //: ein Endpunkt konnte ermittelt werden
-                _ = sceneView.addMeasurepoint(at: newVector, color: .orange, type: .static)
-                _ = sceneView.addLine(from: startValue, to: newVector, with: .orange)
-                self.printDistance(with: startValue.distanceFromPos(pos: newVector))
+                let endPoint = sceneView.addMeasurepoint(at: newVector, color: .orange, type: .static)
+                _ = sceneView.addLine(startPoint: startValue, endPoint: endPoint, from: startValue.position, to: newVector, with: .orange)
+                self.printDistance(with: startValue.position.distanceFromPos(pos: newVector))
                 handler.currentState = handler.walkingState
                 return
             }
             //: es wurde auf eine bekannte Node gezielt
-            _ = sceneView.addLine(from: startValue, to: knownNode.position, with: .orange)
-            self.printDistance(with: startValue.distanceFromPos(pos: knownNode.position))
+            _ = sceneView.addLine(startPoint: startValue, endPoint: knownNode, from: startValue.position, to: knownNode.position, with: .orange)
+            self.printDistance(with: startValue.position.distanceFromPos(pos: knownNode.position))
             handler.currentState = handler.walkingState
         })
     }
@@ -93,17 +93,11 @@ internal final class MeasuringState: State {
     
     override final func deinitState() {
         self.timer.invalidate()
-        self.startVector = nil
+        self.startNode = nil
     }
     
     override internal final func handleTouchesBegan(at point: CGPoint) {
-        _ = self.execute({ (_, sceneView, _) in
-            guard let knownNode = sceneView.getNode(for: point), knownNode.name == "MeasurePoint" else {
-                self.handleMeasureSituation()
-                return
-            }
-            knownNode.geometry?.firstMaterial?.diffuse.contents = UIColor.red
-        })
+        self.handleMeasureSituation()
     }
     
     private final func printDistance(with value: Float) {

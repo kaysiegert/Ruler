@@ -16,6 +16,7 @@ internal final class StateHandler {
     internal final let measuringState: MeasuringState
     internal final let measuringState2: MeasuringState2
     internal final let walkingState: WalkingState
+    internal final let settingState: SettingState
     
     //: World-Model
     internal final let world: World
@@ -26,6 +27,7 @@ internal final class StateHandler {
         self.measuringState = MeasuringState.init()
         self.measuringState2 = MeasuringState2.init()
         self.walkingState = WalkingState.init()
+        self.settingState = SettingState.init()
         self._currentState = self.startState
         
         //: Setup World-Model
