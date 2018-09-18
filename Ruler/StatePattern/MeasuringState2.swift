@@ -58,7 +58,9 @@ internal final class MeasuringState2: State {
                 let action = SCNAction.move(to: endValue, duration: 0.1)
                 safeEndNode.runAction(action)
             } else {
-                self.endNode = self.addPoint(at: endValue)
+                _ = self.execute({ (_, sceneView, _) in
+                    self.endNode = sceneView.addMeasurepoint(at: endValue, color: .green, type: .dynamic)
+                })
             }
             self.printDistance(with: safeStart.distanceFromPos(pos: endValue))
         })
@@ -67,7 +69,7 @@ internal final class MeasuringState2: State {
     private final func addPoint(at vector: SCNVector3) -> SCNNode {
         var result = SCNNode.init()
         _ = self.execute({ (_, sceneView, _) in
-            result = sceneView.addMeasurepoint(at: vector, color: .green, type: .dynamic)
+            result = sceneView.addMeasurepoint(at: vector, color: .green, type: .static)
         })
         return result
     }
@@ -117,7 +119,7 @@ internal final class MeasuringState2: State {
             return
         }
         let distance = newPosition.distanceFromPos(pos: startValue)
-        self.addDistanceNode(at: newPosition, with: distance)
+        //self.addDistanceNode(at: newPosition, with: distance)
         _ = self.execute({ (_, sceneView, _) in
             sceneView.addMeasurepoint(at: newPosition, color: .green, type: .dynamic)
             sceneView.scene.rootNode.addChildNode(SCNNode.createLine(from: startValue, to: newPosition, with: UIColor.green))
