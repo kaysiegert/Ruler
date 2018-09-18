@@ -121,11 +121,12 @@ internal final class MeasuringState2: State {
         let distance = newPosition.distanceFromPos(pos: startValue)
         //self.addDistanceNode(at: newPosition, with: distance)
         _ = self.execute({ (_, sceneView, _) in
-            sceneView.addMeasurepoint(at: newPosition, color: .green, type: .dynamic)
-            sceneView.scene.rootNode.addChildNode(SCNNode.createLine(from: startValue, to: newPosition, with: UIColor.green))
+            _ = sceneView.addMeasurepoint(at: newPosition, color: .green, type: .static)
+            _ = sceneView.addLine(from: startValue, to: newPosition, with: .green)
         })
         self.printDistance(with: distance)
         _ = self.execute({ (_, _, handler) in
+            self.endNode?.physicsBody?.type = SCNPhysicsBodyType.static
             handler.currentState = handler.walkingState
         })
     }
