@@ -9,7 +9,17 @@
 import Foundation
 
 var settingNode: Int = 0
-var world = [(SCNNode, [(line: SCNNode, end: SCNNode)])].init()
+var world = [(SCNNode, [Branch])].init()
+
+internal final class Branch {
+    internal let start: SCNNode
+    internal var line: SCNNode
+    
+    init(start: SCNNode, line: SCNNode) {
+        self.start = start
+        self.line = line
+    }
+}
 
 internal final class WalkingState: State {
     

@@ -32,15 +32,20 @@ internal final class SettingState: State {
         if let newPosition = self.getPositionInFront(with: point) {
             let action = SCNAction.move(to: newPosition, duration: 0.01)
             world[settingNode].0.runAction(action) {
+                
+                /*
+                 -> endnodes indices auslesen
+                 -> lines verschwinden lassen (bei endnodes und aktueller node)
+                 -> neue line erstellen und bei allen nodes registrieren (endnodes und aktuelle node)
+                 */
                 let lines = world[settingNode].1
                 //: Unbedingt Performanter machen und world bereinigen
                 let connectedNodes = world.filter { (arg) -> Bool in
                     
-                    let (node, linesTmp) = arg
+                    let (_, linesTmp) = arg
                     return lines.reduce(false, { (tmp, line) -> Bool in
-                        return tmp || linesTmp.contains(where: { (arg1) -> Bool in
-                            let (lineT, _) = arg1
-                            return lineT == line.line
+                        return tmp || linesTmp.contains(where: { (branch) -> Bool in
+                            return branch.line == line.line
                         })
                     })
                     }.filter { (node, _) -> Bool in
@@ -54,7 +59,7 @@ internal final class SettingState: State {
                 }
                 connectedNodes.forEach({ (node, _) in
                     _ = self.execute({ (_, sceneView, _) in
-                        sceneView.addLine(startPoint: world[settingNode].0, endPoint: node, from: world[settingNode].0.position, to: node.position, with: UIColor.yellow)
+                        _ = sceneView.addLine(startPoint: world[settingNode].0, endPoint: node, from: world[settingNode].0.position, to: node.position, with: UIColor.yellow)
                     })
                 })
             }
