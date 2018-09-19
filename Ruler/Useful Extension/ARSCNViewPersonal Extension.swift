@@ -96,11 +96,11 @@ internal extension ARSCNView {
         }) {
             //: Node kommt vor --> line hinzufügen
             var newConnections = world[concreteStartPoint].1
-            newConnections.append(line)
+            newConnections.append((line, endPoint))
             world[concreteStartPoint] = (world[concreteStartPoint].0, newConnections)
         } else {
             //: Node kommt noch nicht vor
-            world.append((startPoint, [line]))
+            world.append((startPoint, [(line, endPoint)]))
         }
         
         //: Adding Linenodes to the world
@@ -109,11 +109,11 @@ internal extension ARSCNView {
         }) {
             //: Node kommt vor --> line hinzufügen
             var newConnections = world[concreteEndPoint].1
-            newConnections.append(line)
+            newConnections.append((line, startPoint))
             world[concreteEndPoint] = (world[concreteEndPoint].0, newConnections)
         } else {
             //: Node kommt noch nicht vor
-            world.append((endPoint, [line]))
+            world.append((endPoint, [(line, endPoint)]))
         }
         
         return line

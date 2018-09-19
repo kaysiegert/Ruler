@@ -14,7 +14,7 @@ internal final class SettingState: State {
         print("SettingState")
         world[settingNode].0.geometry?.firstMaterial?.diffuse.contents = UIColor.purple
         world[settingNode].1.forEach { (node) in
-            node.geometry?.firstMaterial?.diffuse.contents = UIColor.cyan
+            node.line.geometry?.firstMaterial?.diffuse.contents = UIColor.cyan
         }
     }
     
@@ -34,9 +34,14 @@ internal final class SettingState: State {
             world[settingNode].0.runAction(action) {
                 let lines = world[settingNode].1
                 //: Unbedingt Performanter machen und world bereinigen
-                let connectedNodes = world.filter { (node, linesTmp) -> Bool in
+                let connectedNodes = world.filter { (arg) -> Bool in
+                    
+                    let (node, linesTmp) = arg
                     return lines.reduce(false, { (tmp, line) -> Bool in
-                        return tmp || linesTmp.contains(line)
+                        return tmp || linesTmp.contains(where: { (arg1) -> Bool in
+                            let (lineT, _) = arg1
+                            return lineT == line.line
+                        })
                     })
                     }.filter { (node, _) -> Bool in
                         return node != world[settingNode].0
@@ -45,7 +50,7 @@ internal final class SettingState: State {
                     node.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
                 }
                 lines.forEach { (line) in
-                    line.removeFromParentNode()
+                    line.line.removeFromParentNode()
                 }
                 connectedNodes.forEach({ (node, _) in
                     _ = self.execute({ (_, sceneView, _) in

@@ -9,7 +9,7 @@
 import Foundation
 
 var settingNode: Int = 0
-var world = [(SCNNode, [SCNNode])].init()
+var world = [(SCNNode, [(line: SCNNode, end: SCNNode)])].init()
 
 internal final class WalkingState: State {
     
