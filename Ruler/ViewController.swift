@@ -17,6 +17,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     private final let handler = StateHandler.init()
     
     override func viewDidLoad() {
+        testWorld()
+        
         super.viewDidLoad()
         // Set the view's delegate
         sceneView.delegate = self

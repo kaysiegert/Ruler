@@ -18,21 +18,17 @@ internal final class MeasuringState2: State {
     private final func getCurrentPosition() -> SCNVector3? {
         var result: SCNVector3? = nil
         _ = self.execute({ (_, sceneView, _) in
+            /*
             guard let currentFrame = sceneView.session.currentFrame else {
                 return
             }
-            /*
             var translation = matrix_identity_float4x4
             // 20cm in front of the camera
             translation.columns.3.z = -0.0
             let transform = simd_mul(currentFrame.camera.transform, translation)
             result = SCNVector3.init(transform.columns.3.x, transform.columns.3.y, transform.columns.3.z)
             */
-            let vpWithZ = SCNVector3(x: 0.0, y: 0.0, z: 0.0)
-            let worldPoint = sceneView.unprojectPoint(vpWithZ)
-            
-            result = SCNVector3.init(x: worldPoint.x, y: worldPoint.y, z: worldPoint.z)
-            
+            result = sceneView.unprojectPoint(SCNVector3Zero)
             
         })
         return result

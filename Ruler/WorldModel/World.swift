@@ -22,15 +22,19 @@ internal final class World: CustomStringConvertible {
         
         fileprivate var description: String {
             return self.branches.reduce("", { (tmp, branch) -> String in
-                return tmp + "\n\t \(branch.node.name ?? "Node") --> Connections: \(branch.connections.count)"
+                let connectionIndices = String(branch.connections.reduce("[", { (tmp, arg) -> String in
+                    let (_, index, _) = arg
+                    return tmp + "\(index), "
+                }).dropLast(2)) + "]"
+                return tmp + "\n\t \(branch.node.name ?? "Node") --> Connections: \(branch.connections.count) \(connectionIndices)"
             })
         }
         
         fileprivate final class Branch {
             fileprivate final let node: SCNNode
-            fileprivate final var connections: [(line: SCNNode, endPoint: Branch)]
+            fileprivate final var connections: [(line: SCNNode, connectionIndex: Int, endPoint: Branch)]
             
-            init(node: SCNNode, connections: [(line: SCNNode, endPoint: Branch)] = [(line: SCNNode, endPoint: Branch)].init()) {
+            init(node: SCNNode, connections: [(line: SCNNode, connectionIndex: Int, endPoint: Branch)] = [(line: SCNNode, connectionIndex: Int, endPoint: Branch)].init()) {
                 self.node = node
                 self.connections = connections
                 self.connections.reserveCapacity(1)
@@ -53,15 +57,19 @@ internal final class World: CustomStringConvertible {
         fileprivate typealias Connection = (line: SCNNode, startBranch: Branch, endBranch: Branch)
         
         fileprivate mutating func union(with otherPolygon: Polygon, and connection: Connection) {
-            connection.startBranch.connections.append((connection.line, connection.endBranch))
-            connection.endBranch.connections.append((connection.line, connection.startBranch))
+            let connectionEndIndex = connection.endBranch.connections.count
+            let connectionStartIndex = connection.startBranch.connections.count
+            connection.startBranch.connections.append((connection.line, connectionStartIndex, connection.endBranch))
+            connection.endBranch.connections.append((connection.line, connectionEndIndex, connection.startBranch))
             self.branches += otherPolygon.branches
         }
         
-        //: Es wird der endBranch angefügt
+        //: Es wird der endBranch der connection angefügt
         fileprivate mutating func insert(_ connection: Connection) {
-            connection.startBranch.connections.append((connection.line, connection.endBranch))
-            connection.endBranch.connections.append((connection.line, connection.startBranch))
+            let connectionEndIndex = connection.endBranch.connections.count
+            let connectionStartIndex = connection.startBranch.connections.count
+            connection.startBranch.connections.append((connection.line, connectionEndIndex, connection.endBranch))
+            connection.endBranch.connections.append((connection.line, connectionStartIndex, connection.startBranch))
             self.branches.append(connection.endBranch)
         }
     }
@@ -87,8 +95,8 @@ internal final class World: CustomStringConvertible {
         case 0:
             //: neues Polygon erstellen
             let startBranch = Polygon.Branch.init(node: startNode)
-            let endBranch = Polygon.Branch.init(node: endNode, connections: [(line, startBranch)])
-            startBranch.connections.append((line, endBranch))
+            let endBranch = Polygon.Branch.init(node: endNode, connections: [(line, 0, startBranch)])
+            startBranch.connections.append((line, 0, endBranch))
             self.polygons.append(Polygon.init(branches: [startBranch, endBranch]))
             
         case 1:
@@ -106,16 +114,15 @@ internal final class World: CustomStringConvertible {
             //: zwei Polygone miteiander vereinigen
             if let concreteStartNode = relevantPolygons[0].startBranch {
                 let concreteEndNode = relevantPolygons[1].endBranch!
-                self.polygons.remove(at: relevantPolygons[0].index)
-                self.polygons.remove(at: relevantPolygons[1].index)
                 self.polygons[relevantPolygons[0].index].union(with: self.polygons[relevantPolygons[1].index], and: (line, concreteStartNode, concreteEndNode))
+                self.polygons.remove(at: relevantPolygons[1].index)
                 
             } else {
                 //: logische Konsequenz
                 let concreteEndNode = relevantPolygons[0].endBranch!
                 let concreteStartNode = relevantPolygons[1].startBranch!
-                self.polygons.remove(at: relevantPolygons[1].index)
                 self.polygons[relevantPolygons[0].index].union(with: self.polygons[relevantPolygons[1].index], and: (line, concreteStartNode, concreteEndNode))
+                self.polygons.remove(at: relevantPolygons[1].index)
             }
             
         default:
@@ -140,10 +147,10 @@ internal final class World: CustomStringConvertible {
             return line
         }
         
-        guard let endNodeConnectionIndex = branch.connections.firstIndex(where: { (_, endBranch) -> Bool in
+        guard let endNodeConnectionIndex = branch.connections.firstIndex(where: { (_, _, endBranch) -> Bool in
             return endBranch.node == endNode
         }), let endNodeNextConnectionIndex = branch.connections[endNodeConnectionIndex].endPoint.connections.firstIndex(where: { (arg) -> Bool in
-            let (_, startBranch) = arg
+            let (_, _, startBranch) = arg
             return startBranch.node == startNode
         }) else {
             return line
@@ -173,7 +180,7 @@ internal final class World: CustomStringConvertible {
                 let newLine = replacing(self.branch.node, branch.connections[idx].line, branch.connections[idx].endPoint.node)
                 let oldLine = branch.connections[idx].line
                 branch.connections[idx].line = newLine
-                guard let nextIndex = branch.connections[idx].endPoint.connections.firstIndex(where: { (line, _) -> Bool in
+                guard let nextIndex = branch.connections[idx].endPoint.connections.firstIndex(where: { (line, _, _) -> Bool in
                     return oldLine == line
                 }) else {
                     continue
@@ -197,4 +204,28 @@ internal final class World: CustomStringConvertible {
         }
         return NodeWorker.init(branch: concreteBranch)
     }
+}
+
+
+func testWorld() {
+    let w = World.init()
+    let n1 = SCNNode.init()
+    let l1 = SCNNode.init()
+    let n2 = SCNNode.init()
+    let l2 = SCNNode.init()
+    let n3 = SCNNode.init()
+    
+    w.insertConnection(from: n1, with: l1, to: n2)
+    w.insertConnection(from: n2, with: l2, to: n3)
+    print(w)
+    
+    let n4 = SCNNode.init()
+    let l3 = SCNNode.init()
+    let n5 = SCNNode.init()
+    w.insertConnection(from: n4, with: l3, to: n5)
+    print(w)
+    
+    let l4 = SCNNode.init()
+    w.insertConnection(from: n4, with: l4, to: n1)
+    print(w)
 }
