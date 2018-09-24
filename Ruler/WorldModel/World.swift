@@ -185,7 +185,7 @@ internal final class World: CustomStringConvertible {
                 }) else {
                     continue
                 }
-                branch.connections[idx].endPoint.connections[nextIndex].line = newLine
+                branch.connections[idx].endPoint.connections[branch.connections[idx].connectionIndex].line = newLine
             }
         }
     }
@@ -221,11 +221,20 @@ func testWorld() {
     
     let n4 = SCNNode.init()
     let l3 = SCNNode.init()
+    l3.name = "first test connection"
     let n5 = SCNNode.init()
     w.insertConnection(from: n4, with: l3, to: n5)
     print(w)
     
     let l4 = SCNNode.init()
+    l4.name = "second test connection"
     w.insertConnection(from: n4, with: l4, to: n1)
     print(w)
+    
+    let r = w.getNodeWorker(for: n4)!
+    r.replaceLines { (_, line, _) -> SCNNode in
+        print("Replacing \(line.name ?? "connection")")
+        return line
+    }
+    
 }
