@@ -124,7 +124,8 @@ internal final class MeasuringState2: State {
         //self.addDistanceNode(at: newPosition, with: distance)
         _ = self.execute({ (_, sceneView, _) in
             let endPoint = sceneView.addMeasurepoint(at: newPosition, color: .green, type: .static)
-            _ = sceneView.addLine(startPoint: startValue, endPoint: endPoint, from: startValue.position, to: newPosition, with: .green)
+            let line = sceneView.addLine(startPoint: startValue, endPoint: endPoint, from: startValue.position, to: newPosition, with: .green)
+            world.insertConnection(from: startValue, with: line, to: endPoint)
         })
         self.printDistance(with: distance)
         _ = self.execute({ (_, _, handler) in

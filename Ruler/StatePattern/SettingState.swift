@@ -12,16 +12,13 @@ internal final class SettingState: State {
     
     override final func initState() {
         print("SettingState")
-        world[settingNode].0.geometry?.firstMaterial?.diffuse.contents = UIColor.purple
-        world[settingNode].1.forEach { (node) in
-            node.line.geometry?.firstMaterial?.diffuse.contents = UIColor.cyan
-        }
+        globalSettingNode.node.geometry?.firstMaterial?.diffuse.contents = UIColor.purple
     }
     
     private final func getPositionInFront(with point: CGPoint) -> SCNVector3? {
         var result: SCNVector3? = nil
         _ = self.execute({ (view, sceneView, _) in
-            let depth = sceneView.projectPoint(world[settingNode].0.position).z
+            let depth = sceneView.projectPoint(globalSettingNode.node.position).z
             let locationWithz = SCNVector3.init(point.x, point.y, CGFloat(depth))
             result = sceneView.unprojectPoint(locationWithz)
         })
@@ -31,38 +28,17 @@ internal final class SettingState: State {
     override final func handleTouchesMoved(at point: CGPoint) {
         if let newPosition = self.getPositionInFront(with: point) {
             let action = SCNAction.move(to: newPosition, duration: 0.01)
-            world[settingNode].0.runAction(action) {
-                
-                /*
-                 -> endnodes indices auslesen
-                 -> lines verschwinden lassen (bei endnodes und aktueller node)
-                 -> neue line erstellen und bei allen nodes registrieren (endnodes und aktuelle node)
-                 */
-                let lines = world[settingNode].1
-                //: Unbedingt Performanter machen und world bereinigen
-                let connectedNodes = world.filter { (arg) -> Bool in
-                    
-                    let (_, linesTmp) = arg
-                    return lines.reduce(false, { (tmp, line) -> Bool in
-                        return tmp || linesTmp.contains(where: { (branch) -> Bool in
-                            return branch.line == line.line
-                        })
-                    })
-                    }.filter { (node, _) -> Bool in
-                        return node != world[settingNode].0
-                }
-                connectedNodes.forEach { (node,_) in
-                    node.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
-                }
-                lines.forEach { (line) in
-                    line.line.removeFromParentNode()
-                }
-                connectedNodes.forEach({ (node, _) in
+            globalSettingNode!.node.runAction(action) {
+                globalSettingNode!.replaceLines { (start, line, end) -> SCNNode in
+                    line.removeFromParentNode()
+                    let newLine = createLine(startPoint: start, endPoint: end, from: start.position, to: end.position, with: .blue)
                     _ = self.execute({ (_, sceneView, _) in
-                        _ = sceneView.addLine(startPoint: world[settingNode].0, endPoint: node, from: world[settingNode].0.position, to: node.position, with: UIColor.yellow)
+                        sceneView.scene.rootNode.addChildNode(newLine)
                     })
-                })
+                    return newLine
+                }
             }
+
         }
     }
     

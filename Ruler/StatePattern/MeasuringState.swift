@@ -74,13 +74,15 @@ internal final class MeasuringState: State {
                 }
                 //: ein Endpunkt konnte ermittelt werden
                 let endPoint = sceneView.addMeasurepoint(at: newVector, color: .orange, type: .static)
-                _ = sceneView.addLine(startPoint: startValue, endPoint: endPoint, from: startValue.position, to: newVector, with: .orange)
+                let line = sceneView.addLine(startPoint: startValue, endPoint: endPoint, from: startValue.position, to: newVector, with: .orange)
+                world.insertConnection(from: startValue, with: line, to: endPoint)
                 self.printDistance(with: startValue.position.distanceFromPos(pos: newVector))
                 handler.currentState = handler.walkingState
                 return
             }
             //: es wurde auf eine bekannte Node gezielt
-            _ = sceneView.addLine(startPoint: startValue, endPoint: knownNode, from: startValue.position, to: knownNode.position, with: .orange)
+            let line = sceneView.addLine(startPoint: startValue, endPoint: knownNode, from: startValue.position, to: knownNode.position, with: .orange)
+            world.insertConnection(from: startValue, with: line, to: knownNode)
             self.printDistance(with: startValue.position.distanceFromPos(pos: knownNode.position))
             handler.currentState = handler.walkingState
         })

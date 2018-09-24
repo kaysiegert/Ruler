@@ -8,19 +8,8 @@
 
 import Foundation
 
-var settingNode: Int = 0
-var world = [(SCNNode, [Branch])].init()
-
-internal final class Branch {
-    internal let start: SCNNode
-    internal var line: SCNNode
-    
-    init(start: SCNNode, line: SCNNode) {
-        self.start = start
-        self.line = line
-    }
-}
-
+var globalSettingNode: World.NodeWorker! = nil
+let world = World.init()
 internal final class WalkingState: State {
     
     override final func initState() {
@@ -44,12 +33,10 @@ internal final class WalkingState: State {
                 return
             }
             //: Go to SettingState
-            guard let settingNodeIndex = world.firstIndex(where: { (node,_) -> Bool in
-                return node == knownNode
-            }) else {
+            guard let settingNodeWorker = world.getNodeWorker(for: knownNode) else {
                 return
             }
-            settingNode = settingNodeIndex
+            globalSettingNode = settingNodeWorker
             handler.currentState = handler.settingState
         })
     }

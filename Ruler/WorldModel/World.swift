@@ -174,6 +174,10 @@ internal final class World: CustomStringConvertible {
             self.branch = branch
         }
         
+        internal var node: SCNNode {
+            return self.branch.node
+        }
+        
         internal func replaceLines(_ replacing: (_ startNode: SCNNode, _ line: SCNNode, _ endNode: SCNNode) -> SCNNode) {
             
             for idx in 0..<branch.connections.count {
