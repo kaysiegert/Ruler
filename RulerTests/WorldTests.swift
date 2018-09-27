@@ -21,6 +21,17 @@ extension SCNNode: FastComparable {
 
 let count = 1000
 internal final class WorldTests: RulerTests {
+  
+    final func testBTree() {
+        var b = BTree<Int, Int>.init()
+        var i = 0
+        self.measure {
+            for _ in 0...count {
+                i = i &+ 1
+                b.insert((i,i))
+            }
+        }
+    }
     
     final func testNewestWorld() {
         let n1 = SCNNode.init()
@@ -53,8 +64,6 @@ internal final class WorldTests: RulerTests {
     final func testNewestWorldReally() {
         let n1 = SCNNode.init()
         let g = UndirectedGraph<SCNNode, SCNNode>.init(firstBranchValue: n1)
-        let r = g
-        r.insertConnection(from: n1, with: SCNNode.init(), to: SCNNode.init())
         self.measure {
             for _ in 0...count {
                 let l1 = SCNNode.init()
@@ -62,5 +71,6 @@ internal final class WorldTests: RulerTests {
                 _ = g.insertConnection(from: n1, with: l1, to: n2)
             }
         }
+        print(g)
     }
 }

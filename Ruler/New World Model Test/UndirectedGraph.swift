@@ -195,10 +195,14 @@ internal final class UndirectedGraph4<BranchValue: Equatable & AnyObject, EdgeVa
 }
 
 
-internal final class UndirectedGraph<BranchValue: FastComparable, EdgeValue: FastComparable> {
+internal final class UndirectedGraph<BranchValue: FastComparable, EdgeValue: FastComparable>: CustomStringConvertible {
     
     private final var branches: ContiguousArray<(value: BranchValue, connections: ContiguousArray<(index: Int, first: Bool)>)>
     private final var edges = ContiguousArray<(first: Int, value: EdgeValue, second: Int)>.init()
+    
+    internal var description: String {
+        return "\(self.branches.count)"
+    }
     
     init(firstBranchValue: BranchValue) {
         self.branches = [(firstBranchValue, connections: ContiguousArray<(index: Int, first: Bool)>.init())]
@@ -216,7 +220,6 @@ internal final class UndirectedGraph<BranchValue: FastComparable, EdgeValue: Fas
     }
     
     @discardableResult
-    @inline(__always)
     internal final func insertConnection(from startValue: BranchValue, with edgeValue: EdgeValue, to endValue: BranchValue) -> UndirectedGraph? {
         if let knownStart = self.searchForBranch(with: startValue) {
             guard let knownEnd = self.searchForBranch(with: endValue) else {
@@ -244,27 +247,6 @@ internal final class UndirectedGraph<BranchValue: FastComparable, EdgeValue: Fas
             self.branches.append((startValue, [(edgeIndex, true)]))
             self.branches[knownEnd].connections.append((edgeIndex, false))
             return nil
-        }
-    }
-    
-    internal final func createWorker(for value: BranchValue) -> BranchWorker? {
-        guard let branchIndex = self.searchForBranch(with: value) else {
-            return nil
-        }
-        return BranchWorker.init(for: branchIndex, on: self)
-    }
-    
-    internal struct BranchWorker {
-        private let graph: UndirectedGraph
-        private let branchIndex: Int
-        
-        fileprivate init(for index: Int, on graph: UndirectedGraph) {
-            self.graph = graph
-            self.branchIndex = index
-        }
-        
-        internal nonmutating func replaceConnections(with replacer: (_ startBranch: BranchValue, _ edgeValue: EdgeValue, _ endBranch: BranchValue) -> EdgeValue) {
-            
         }
     }
 }
