@@ -10,6 +10,10 @@
 		0D9AFC55639FF7493318E9A0 /* Pods_RulerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD6A3204AAE23CBD9C6D4822 /* Pods_RulerUITests.framework */; };
 		477222D25B5937E85B98AABB /* Pods_Ruler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9220FCB4DA88A232550BBAD /* Pods_Ruler.framework */; };
 		B8AD785C259B155ED8A94EE3 /* Pods_RulerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC91902F2A57D709A05F4421 /* Pods_RulerTests.framework */; };
+		C60BC346215BF56F00CE2E98 /* Undirected Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60BC345215BF56F00CE2E98 /* Undirected Graph.swift */; };
+		C60BC349215C1CF500CE2E98 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6911861214F964A00553624 /* World.swift */; };
+		C60BC34A215C1CF900CE2E98 /* Undirected Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60BC345215BF56F00CE2E98 /* Undirected Graph.swift */; };
+		C60BC34C215C1D5800CE2E98 /* WorldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60BC347215C1C4500CE2E98 /* WorldTests.swift */; };
 		C61BEAFD2147BDBD0042EE12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61BEAFC2147BDBD0042EE12 /* AppDelegate.swift */; };
 		C61BEAFF2147BDBD0042EE12 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = C61BEAFE2147BDBD0042EE12 /* art.scnassets */; };
 		C61BEB012147BDBD0042EE12 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61BEB002147BDBD0042EE12 /* ViewController.swift */; };
@@ -25,6 +29,10 @@
 		C61BEB3F2147E1410042EE12 /* StateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61BEB3E2147E1410042EE12 /* StateHandler.swift */; };
 		C61BEB452147F1110042EE12 /* PlaneDetector.mm in Sources */ = {isa = PBXBuildFile; fileRef = C61BEB442147F1110042EE12 /* PlaneDetector.mm */; };
 		C61BEB472147F12A0042EE12 /* ARHitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61BEB462147F12A0042EE12 /* ARHitTest.swift */; };
+		C661D3EB215CA76900D053A1 /* UndirectedGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = C661D3EA215CA76900D053A1 /* UndirectedGraph.swift */; };
+		C661D3EC215CB4A300D053A1 /* UndirectedGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = C661D3EA215CA76900D053A1 /* UndirectedGraph.swift */; };
+		C661D3EE215CBB4A00D053A1 /* UndirectedGraph2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C661D3ED215CBB4A00D053A1 /* UndirectedGraph2.swift */; };
+		C661D3EF215CBED300D053A1 /* UndirectedGraph2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C661D3ED215CBB4A00D053A1 /* UndirectedGraph2.swift */; };
 		C6911862214F964A00553624 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6911861214F964A00553624 /* World.swift */; };
 		C6911864214F9C9C00553624 /* MeasuringState2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6911863214F9C9C00553624 /* MeasuringState2.swift */; };
 		C6911867214FA9D600553624 /* UISegementedControl Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6911866214FA9D600553624 /* UISegementedControl Extension.swift */; };
@@ -57,6 +65,8 @@
 		719116AA3041208C3F79A00E /* Pods-RulerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RulerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RulerUITests/Pods-RulerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8A20852842DE1C3B86FF1345 /* Pods-Ruler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ruler.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ruler/Pods-Ruler.release.xcconfig"; sourceTree = "<group>"; };
 		B5B74BC89CD6FF95A0F9CC34 /* Pods-RulerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RulerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RulerTests/Pods-RulerTests.release.xcconfig"; sourceTree = "<group>"; };
+		C60BC345215BF56F00CE2E98 /* Undirected Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Undirected Graph.swift"; sourceTree = "<group>"; };
+		C60BC347215C1C4500CE2E98 /* WorldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTests.swift; sourceTree = "<group>"; };
 		C61BEAF92147BDBD0042EE12 /* Ruler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ruler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C61BEAFC2147BDBD0042EE12 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C61BEAFE2147BDBD0042EE12 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -80,6 +90,8 @@
 		C61BEB442147F1110042EE12 /* PlaneDetector.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlaneDetector.mm; sourceTree = "<group>"; };
 		C61BEB462147F12A0042EE12 /* ARHitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARHitTest.swift; sourceTree = "<group>"; };
 		C61BEB482147F3260042EE12 /* PlaneDetector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaneDetector.h; sourceTree = "<group>"; };
+		C661D3EA215CA76900D053A1 /* UndirectedGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndirectedGraph.swift; sourceTree = "<group>"; };
+		C661D3ED215CBB4A00D053A1 /* UndirectedGraph2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndirectedGraph2.swift; sourceTree = "<group>"; };
 		C6911861214F964A00553624 /* World.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
 		C6911863214F9C9C00553624 /* MeasuringState2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasuringState2.swift; sourceTree = "<group>"; };
 		C6911866214FA9D600553624 /* UISegementedControl Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegementedControl Extension.swift"; sourceTree = "<group>"; };
@@ -142,6 +154,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C60BC344215BF52800CE2E98 /* New World Model */ = {
+			isa = PBXGroup;
+			children = (
+				C60BC345215BF56F00CE2E98 /* Undirected Graph.swift */,
+				C661D3EA215CA76900D053A1 /* UndirectedGraph.swift */,
+				C661D3ED215CBB4A00D053A1 /* UndirectedGraph2.swift */,
+			);
+			path = "New World Model";
+			sourceTree = "<group>";
+		};
 		C61BEAF02147BDBD0042EE12 = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +189,7 @@
 		C61BEAFB2147BDBD0042EE12 /* Ruler */ = {
 			isa = PBXGroup;
 			children = (
+				C60BC344215BF52800CE2E98 /* New World Model */,
 				C6911868214FAE1900553624 /* UIParts */,
 				C6911865214FA9C200553624 /* Useful Extension */,
 				C6911860214F962D00553624 /* WorldModel */,
@@ -188,6 +211,7 @@
 			children = (
 				C61BEB132147BDBE0042EE12 /* RulerTests.swift */,
 				C61BEB152147BDBE0042EE12 /* Info.plist */,
+				C60BC347215C1C4500CE2E98 /* WorldTests.swift */,
 			);
 			path = RulerTests;
 			sourceTree = "<group>";
@@ -462,10 +486,13 @@
 				C6911867214FA9D600553624 /* UISegementedControl Extension.swift in Sources */,
 				C6B8972B21512E49006F5EC0 /* SettingState.swift in Sources */,
 				C61BEB012147BDBD0042EE12 /* ViewController.swift in Sources */,
+				C661D3EE215CBB4A00D053A1 /* UndirectedGraph2.swift in Sources */,
 				C6911864214F9C9C00553624 /* MeasuringState2.swift in Sources */,
 				C6911862214F964A00553624 /* World.swift in Sources */,
 				C61BEAFD2147BDBD0042EE12 /* AppDelegate.swift in Sources */,
 				C61BEB302147C92C0042EE12 /* StartState.swift in Sources */,
+				C661D3EB215CA76900D053A1 /* UndirectedGraph.swift in Sources */,
+				C60BC346215BF56F00CE2E98 /* Undirected Graph.swift in Sources */,
 				C691186A214FAE3C00553624 /* SegmentedControl.swift in Sources */,
 				C6B8972721510FD2006F5EC0 /* ARSCNViewPersonal Extension.swift in Sources */,
 				C61BEB472147F12A0042EE12 /* ARHitTest.swift in Sources */,
@@ -478,6 +505,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C661D3EF215CBED300D053A1 /* UndirectedGraph2.swift in Sources */,
+				C60BC349215C1CF500CE2E98 /* World.swift in Sources */,
+				C60BC34A215C1CF900CE2E98 /* Undirected Graph.swift in Sources */,
+				C60BC34C215C1D5800CE2E98 /* WorldTests.swift in Sources */,
+				C661D3EC215CB4A300D053A1 /* UndirectedGraph.swift in Sources */,
 				C61BEB142147BDBE0042EE12 /* RulerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

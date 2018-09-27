@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Ruler
+
 
 class RulerTests: XCTestCase {
 
