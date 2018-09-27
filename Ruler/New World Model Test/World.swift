@@ -21,13 +21,15 @@ internal final class World: CustomStringConvertible {
     fileprivate struct Polygon: CustomStringConvertible {
         
         fileprivate var description: String {
+            return "\(self.branches.count)"
+            /*
             return self.branches.reduce("", { (tmp, branch) -> String in
                 let connectionIndices = String(branch.connections.reduce("[", { (tmp, arg) -> String in
                     let (_, index, _) = arg
                     return tmp + "\(index), "
                 }).dropLast(2)) + "]"
                 return tmp + "\n\t \(branch.node.name ?? "Node") --> Connections: \(branch.connections.count) \(connectionIndices)"
-            })
+            })*/
         }
         
         fileprivate final class Branch {

@@ -9,52 +9,57 @@
 import Foundation
 import SceneKit
 
+extension SCNNode: FastComparable {
+    static func == (lhs: SCNNode, rhs: SCNNode) -> Bool {
+        return lhs === rhs
+    }
+    
+    static func << (lhs: SCNNode, rhs: SCNNode) -> Bool {
+        return lhs.opacity < rhs.opacity
+    }
+}
+
 let count = 1000
 internal final class WorldTests: RulerTests {
-    final func testNewWorld() {
-        self.measure {
-            let n1 = SCNNode.init()
-            var g = UndirectedGraph<SCNNode, SCNNode>.init(for: n1)
-            for _ in 0...count {
-                let l1 = SCNNode.init()
-                let n2 = SCNNode.init()
-                _ = g.insertConnection(from: n2, with: l1, to: n1)
-            }
-        }
-    }
-    
-    final func testOldWorld() {
-        self.measure {
-            let w = World.init()
-            let n1 = SCNNode.init()
-            for _ in 0...count {
-                let l1 = SCNNode.init()
-                let n2 = SCNNode.init()
-                w.insertConnection(from: n1, with: l1, to: n2)
-            }
-        }
-    }
     
     final func testNewestWorld() {
+        let n1 = SCNNode.init()
+        var g = UndirectedGraph2<SCNNode, SCNNode>.init(branch: n1)
         self.measure {
-            let n1 = SCNNode.init()
-            var g = UndirectedGraph2<SCNNode, SCNNode>.init(branch: n1)
             for _ in 0...count {
                 let l1 = SCNNode.init()
                 let n2 = SCNNode.init()
-                _ = g.insertConnection(from: n2, with: l1, to: n1)
+                _ = g.insertConnection(from: n1, with: l1, to: n2)
             }
         }
+        print(g)
     }
     
-    final func testNewestWorld2() {
+    final func testNewestWorldReal() {
+        let n1 = SCNNode.init()
+        let g = UndirectedGraph4<SCNNode, SCNNode>.init(branch: n1)
+        let r = g
+        r.insertConnection(from: n1, with: SCNNode.init(), to: SCNNode.init())
         self.measure {
-            let n1 = SCNNode.init()
-            var g = UndirectedGraph3<SCNNode, SCNNode>.init(firstBranch: n1)
             for _ in 0...count {
                 let l1 = SCNNode.init()
                 let n2 = SCNNode.init()
-                _ = g.insertConnection(from: n2, with: l1, to: n1)
+                _ = g.insertConnection(from: n1, with: l1, to: n2)
+            }
+        }
+        print(g)
+    }
+    
+    final func testNewestWorldReally() {
+        let n1 = SCNNode.init()
+        let g = UndirectedGraph<SCNNode, SCNNode>.init(firstBranchValue: n1)
+        let r = g
+        r.insertConnection(from: n1, with: SCNNode.init(), to: SCNNode.init())
+        self.measure {
+            for _ in 0...count {
+                let l1 = SCNNode.init()
+                let n2 = SCNNode.init()
+                _ = g.insertConnection(from: n1, with: l1, to: n2)
             }
         }
     }

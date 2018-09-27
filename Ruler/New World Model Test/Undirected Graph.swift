@@ -7,11 +7,15 @@
 //
 
 import Foundation
-
-internal struct UndirectedGraph<BranchValue: Equatable, EdgeValue: Equatable> {
+/*
+internal struct UndirectedGraph<BranchValue: Equatable & AnyObject, EdgeValue: Equatable>: CustomStringConvertible {
     
     private var branches: [UnsafeMutablePointer<Branch>]
     private var edges = [(first: UnsafeMutablePointer<Edge>, second: UnsafeMutablePointer<Edge>)].init()
+    
+    internal var description: String {
+        return "\(self.branches.count)"
+    }
     
     private struct Branch {
         
@@ -24,7 +28,7 @@ internal struct UndirectedGraph<BranchValue: Equatable, EdgeValue: Equatable> {
         }
         
         fileprivate static func ==(lhs: Branch, rhs: BranchValue) -> Bool {
-            return lhs.value == rhs
+            return lhs.value === rhs
         }
     }
     
@@ -91,3 +95,4 @@ internal struct UndirectedGraph<BranchValue: Equatable, EdgeValue: Equatable> {
         }
     }
 }
+*/

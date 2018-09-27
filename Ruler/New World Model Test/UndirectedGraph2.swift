@@ -7,31 +7,36 @@
 //
 
 import Foundation
+import SceneKit
 
-internal struct UndirectedGraph3<BranchValue: Equatable, EdgeValue> {
+internal final class UndirectedGraph3: CustomStringConvertible {
     
     private var branches: [Branch]
     
-    init(firstBranch: BranchValue) {
+    internal var description: String {
+        return "\(self.branches.first!.connections.count)"
+    }
+    
+    init(firstBranch: SCNNode) {
         self.branches = [Branch.init(value: firstBranch)]
     }
     
     private final class Branch {
-        fileprivate final let value: BranchValue
-        fileprivate final var connections = [(UnsafeMutablePointer<EdgeValue>, next: Branch)].init()
+        fileprivate final let value: SCNNode
+        fileprivate final var connections = [(UnsafeMutablePointer<SCNNode>, next: Branch)].init()
         
-        init(value: BranchValue) {
+        init(value: SCNNode) {
             self.value = value
         }
     }
     
-    private nonmutating func searchForBranch(with value: BranchValue) -> Branch? {
+    private func searchForBranch(with value: SCNNode) -> Branch? {
         return self.branches.first { (branch) -> Bool in
-            return branch.value == value
+            return branch.value === value
         }
     }
     
-    internal mutating func insertConnection(from startBranch: BranchValue, with edge: EdgeValue, to endBranch: BranchValue) -> UndirectedGraph3<BranchValue, EdgeValue>? {
+    internal func insertConnection(from startBranch: SCNNode, with edge: SCNNode, to endBranch: SCNNode) -> UndirectedGraph3? {
         if let knownStart = self.searchForBranch(with: startBranch) {
             guard let knwonEnd = self.searchForBranch(with: endBranch) else {
                 
@@ -41,17 +46,17 @@ internal struct UndirectedGraph3<BranchValue: Equatable, EdgeValue> {
             return nil
         } else {
             guard let knownEnd = self.searchForBranch(with: endBranch) else {
-                var newGraph = UndirectedGraph3<BranchValue, EdgeValue>.init(firstBranch: startBranch)
+                var newGraph = UndirectedGraph3.init(firstBranch: startBranch)
                 _ = newGraph.insertConnection(from: startBranch, with: edge, to: endBranch)
                 return newGraph
             }
             
             let newStartBranch = Branch.init(value: startBranch)
-            let newEdge = Edge.init(first: newStartBranch, edge: edge, second: knownEnd)
-            newStartBranch.connections.append((newEdge, true))
-            knownEnd.connections.append((newEdge, false))
+            let edgePoi = UnsafeMutablePointer<SCNNode>.allocate(capacity: 1)
+            edgePoi.initialize(to: edge)
+            newStartBranch.connections.append((edgePoi, knownEnd))
+            knownEnd.connections.append((edgePoi, newStartBranch))
             self.branches.append(newStartBranch)
-            //self.edges.append(newEdge)
             return nil
         }
     }

@@ -8,20 +8,23 @@
 
 import Foundation
 
-internal struct UndirectedGraph2<BranchValue: Equatable, EdgeValue: Equatable> {
+internal struct UndirectedGraph2<BranchValue: Equatable & AnyObject, EdgeValue: Equatable>: CustomStringConvertible {
     
-    private var branchs: [(value: BranchValue, connections: [(index: Int, first: Bool)])]
+    private var branches: [(value: BranchValue, connections: [(index: Int, first: Bool)])]
     private var edges = [(value: EdgeValue, first: Int, second: Int)].init()
     
+    internal var description: String {
+        return "\(self.branches[0].connections.count)"
+    }
+    
     init(branch: BranchValue) {
-        self.branchs = [(branch, [(Int, Bool)].init())]
-        self.branchs.reserveCapacity(1000)
-        self.edges.reserveCapacity(1000)
+        self.branches = [(branch, [(Int, Bool)].init())]
     }
     
     private func searchForBranch(with value: BranchValue) -> Int? {
-        return self.branchs.firstIndex(where: { (valueTmp, _) -> Bool in
-            return valueTmp == value
+        return self.branches.firstIndex(where: { (arg) -> Bool in
+            let (valueTmp, _) = arg
+            return valueTmp === value
         })
     }
     
@@ -39,15 +42,16 @@ internal struct UndirectedGraph2<BranchValue: Equatable, EdgeValue: Equatable> {
                 let edgeIndex = self.edges.count
                 precondition(true)
                 self.edges.append((line, knownStart, endBranchIndex))
-                self.branchs[knownStart].connections.append((edgeIndex, true))
-                self.branchs.append((endBranch, [(edgeIndex, false)]))
+                self.branches[knownStart].connections.append((edgeIndex, true))
+                precondition(true)
+                self.branches.append((endBranch, [(edgeIndex, false)]))
                 return nil
             }
             let edgeIndex = self.edges.count
             precondition(true)
             self.edges.append((line, knownStart, knownEnd))
-            self.branchs[knownStart].connections.append((edgeIndex, true))
-            self.branchs[knownEnd].connections.append((edgeIndex, false))
+            self.branches[knownStart].connections.append((edgeIndex, true))
+            self.branches[knownEnd].connections.append((edgeIndex, false))
             return nil
         } else {
             guard let knownEnd = self.searchForBranch(with: endBranch) else {
@@ -56,9 +60,9 @@ internal struct UndirectedGraph2<BranchValue: Equatable, EdgeValue: Equatable> {
                 return newGraph
             }
             let edgeIndex = self.edges.count
-            self.edges.append((line, self.branchs.count, knownEnd))
-            self.branchs[knownEnd].connections.append((edgeIndex, false))
-            self.branchs.append((startBranch, [(edgeIndex, true)]))
+            self.edges.append((line, self.branches.count, knownEnd))
+            self.branches[knownEnd].connections.append((edgeIndex, false))
+            self.branches.append((startBranch, [(edgeIndex, true)]))
             return nil
         }
     }
