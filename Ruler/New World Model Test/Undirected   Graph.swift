@@ -194,7 +194,7 @@ internal final class UndirectedGraph4<BranchValue: Equatable & AnyObject, EdgeVa
     }
 }
 
-
+/*
 internal final class UndirectedGraph<BranchValue: FastComparable, EdgeValue: FastComparable>: CustomStringConvertible {
     
     private final var branches: ContiguousArray<(value: BranchValue, connections: ContiguousArray<(index: Int, first: Bool)>)>
@@ -208,18 +208,12 @@ internal final class UndirectedGraph<BranchValue: FastComparable, EdgeValue: Fas
         self.branches = [(firstBranchValue, connections: ContiguousArray<(index: Int, first: Bool)>.init())]
     }
     
-    deinit {
-        self.branches.removeAll()
-        self.edges.removeAll()
-    }
-    
     private final func searchForBranch(with value: BranchValue) -> Int? {
         return self.branches.firstIndex(where: { (branchValue, _) -> Bool in
             return branchValue == value
         })
     }
     
-    @discardableResult
     internal final func insertConnection(from startValue: BranchValue, with edgeValue: EdgeValue, to endValue: BranchValue) -> UndirectedGraph? {
         if let knownStart = self.searchForBranch(with: startValue) {
             guard let knownEnd = self.searchForBranch(with: endValue) else {
@@ -250,3 +244,4 @@ internal final class UndirectedGraph<BranchValue: FastComparable, EdgeValue: Fas
         }
     }
 }
+*/

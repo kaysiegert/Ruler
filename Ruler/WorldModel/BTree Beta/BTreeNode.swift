@@ -201,12 +201,23 @@ extension BTreeNode {
         return elements.remove(at: slot)
     }
 
+    internal final func search(for key: Key) -> Value? {
+        let result = self.slot(of: key)
+        guard let matchIndex = result.match else {
+            guard self.isLeaf else {
+                return self.children[result.descend].search(for: key)
+            }
+            return nil
+        }
+        return self.elements[matchIndex].1
+    }
+    
     /// Does one step toward looking up an element with `key`, returning the slot index of a direct match (if any), 
     /// and the slot index to use to continue descending.
     ///
     /// - Complexity: O(log(order))
     @inline(__always)
-    internal func slot(of key: Key, choosing selector: BTreeKeySelector = .first) -> (match: Int?, descend: Int) {
+    internal final func slot(of key: Key, choosing selector: BTreeKeySelector = .first) -> (match: Int?, descend: Int) {
         switch selector {
         case .first, .any:
             var start = 0

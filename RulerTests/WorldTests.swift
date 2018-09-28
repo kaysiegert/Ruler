@@ -19,19 +19,15 @@ extension SCNNode: FastComparable {
     }
 }
 
+extension SCNNode: hasKey {
+    var key: Int {
+        return self.hash
+    }
+}
+
 let count = 1000
 internal final class WorldTests: RulerTests {
   
-    final func testBTree() {
-        var b = BTree<Int, Int>.init()
-        var i = 0
-        self.measure {
-            for _ in 0...count {
-                i = i &+ 1
-                b.insert((i,i))
-            }
-        }
-    }
     
     final func testNewestWorld() {
         let n1 = SCNNode.init()
@@ -60,17 +56,67 @@ internal final class WorldTests: RulerTests {
         }
         print(g)
     }
+
     
-    final func testNewestWorldReally() {
+    final func testBTree() {
+        var b = BTree<Int, SCNNode>.init()
         let n1 = SCNNode.init()
-        let g = UndirectedGraph<SCNNode, SCNNode>.init(firstBranchValue: n1)
-        self.measure {
+        n1.name = "Test"
+        b.insert((n1.hash, n1))
+        let i = b.index(forKey: n1.hash)!
+        var nodes = [SCNNode].init()
+        for _ in 0...9 {
             for _ in 0...count {
-                let l1 = SCNNode.init()
-                let n2 = SCNNode.init()
-                _ = g.insertConnection(from: n1, with: l1, to: n2)
+                let n = SCNNode.init()
+                b.insert((n.hash, n))
+                nodes.append(n)
+                let m = SCNNode.init()
+                b.insert((m.hash, m))
+                var j = b.offset(forKey: n.hash)!
+                j = j &+ 1
             }
         }
-        print(g)
+        self.measure {
+            nodes.forEach({ (node) in
+                let j = b.offset(forKey: node.hash)!
+                let g = b.element(atOffset: j)
+            })
+        }
+        let j = b.offset(forKey: n1.hash)!
+        print(b.element(atOffset: j).1.name)
+    }
+    
+    final func testArray() {
+        var nodes = [SCNNode].init()
+        for _ in 0...9 {
+            for _ in 0...count {
+                nodes.append(SCNNode.init())
+            }
+        }
+        
+        self.measure {
+            nodes.forEach({ (node) in
+                let j = nodes.firstIndex(of: node)!
+                let g = nodes[j]
+            })
+        }
+    }
+    
+    final func testBTree2() {
+        var b = BTree<Int, Int>.init()
+        b.insert((5,90))
+        print(b.offset(forKey: 5)!)
+        for i in 6...20 {
+            b.insert((i,i))
+        }
+        //b.insert((5,90))
+        let idx = b.offset(forKey: 5)!
+        print(b.offset(forKey: 5)!)
+        print(b.element(atOffset: idx).1)
+        for i in 2...4 {
+            b.insert((i,i))
+        }
+        print(b.element(atOffset: idx).0)
+        assert(90 == b.element(atOffset: idx).1)
     }
 }
