@@ -9,21 +9,6 @@
 /* Begin PBXBuildFile section */
 		0D9AFC55639FF7493318E9A0 /* Pods_RulerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD6A3204AAE23CBD9C6D4822 /* Pods_RulerUITests.framework */; };
 		477222D25B5937E85B98AABB /* Pods_Ruler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9220FCB4DA88A232550BBAD /* Pods_Ruler.framework */; };
-		8F370367215E46DF006074C5 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 8F370363215E46DF006074C5 /* Images */; };
-		8F370368215E46DF006074C5 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 8F370363215E46DF006074C5 /* Images */; };
-		8F370369215E46DF006074C5 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 8F370363215E46DF006074C5 /* Images */; };
-		8F37036F215E4E41006074C5 /* Arial Narrow Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F37036B215E4E41006074C5 /* Arial Narrow Italic.ttf */; };
-		8F370370215E4E41006074C5 /* Arial Narrow Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F37036B215E4E41006074C5 /* Arial Narrow Italic.ttf */; };
-		8F370371215E4E41006074C5 /* Arial Narrow Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F37036B215E4E41006074C5 /* Arial Narrow Italic.ttf */; };
-		8F370372215E4E41006074C5 /* Arial Narrow Bold Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F37036C215E4E41006074C5 /* Arial Narrow Bold Italic.ttf */; };
-		8F370373215E4E41006074C5 /* Arial Narrow Bold Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F37036C215E4E41006074C5 /* Arial Narrow Bold Italic.ttf */; };
-		8F370374215E4E41006074C5 /* Arial Narrow Bold Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F37036C215E4E41006074C5 /* Arial Narrow Bold Italic.ttf */; };
-		8F370375215E4E41006074C5 /* Arial Narrow.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F37036D215E4E41006074C5 /* Arial Narrow.ttf */; };
-		8F370376215E4E41006074C5 /* Arial Narrow.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F37036D215E4E41006074C5 /* Arial Narrow.ttf */; };
-		8F370377215E4E41006074C5 /* Arial Narrow.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F37036D215E4E41006074C5 /* Arial Narrow.ttf */; };
-		8F370378215E4E41006074C5 /* Arial Narrow Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F37036E215E4E41006074C5 /* Arial Narrow Bold.ttf */; };
-		8F370379215E4E41006074C5 /* Arial Narrow Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F37036E215E4E41006074C5 /* Arial Narrow Bold.ttf */; };
-		8F37037A215E4E41006074C5 /* Arial Narrow Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F37036E215E4E41006074C5 /* Arial Narrow Bold.ttf */; };
 		B8AD785C259B155ED8A94EE3 /* Pods_RulerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC91902F2A57D709A05F4421 /* Pods_RulerTests.framework */; };
 		C60BC346215BF56F00CE2E98 /* Undirected Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60BC345215BF56F00CE2E98 /* Undirected Graph.swift */; };
 		C60BC349215C1CF500CE2E98 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6911861214F964A00553624 /* World.swift */; };
@@ -31,6 +16,7 @@
 		C60BC34C215C1D5800CE2E98 /* WorldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60BC347215C1C4500CE2E98 /* WorldTests.swift */; };
 		C6199B1F215E4412004C4344 /* UndirectedGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6199B1E215E4412004C4344 /* UndirectedGraph.swift */; };
 		C61BEAFD2147BDBD0042EE12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61BEAFC2147BDBD0042EE12 /* AppDelegate.swift */; };
+		C61BEAFF2147BDBD0042EE12 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = C61BEAFE2147BDBD0042EE12 /* art.scnassets */; };
 		C61BEB012147BDBD0042EE12 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61BEB002147BDBD0042EE12 /* ViewController.swift */; };
 		C61BEB042147BDBD0042EE12 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C61BEB022147BDBD0042EE12 /* Main.storyboard */; };
 		C61BEB062147BDBD0042EE12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C61BEB052147BDBD0042EE12 /* Assets.xcassets */; };
@@ -117,17 +103,13 @@
 		57DFD4CCBCB1755C633306CD /* Pods-RulerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RulerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RulerTests/Pods-RulerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		719116AA3041208C3F79A00E /* Pods-RulerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RulerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RulerUITests/Pods-RulerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8A20852842DE1C3B86FF1345 /* Pods-Ruler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ruler.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ruler/Pods-Ruler.release.xcconfig"; sourceTree = "<group>"; };
-		8F370363215E46DF006074C5 /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = SOURCE_ROOT; };
-		8F37036B215E4E41006074C5 /* Arial Narrow Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arial Narrow Italic.ttf"; sourceTree = "<group>"; };
-		8F37036C215E4E41006074C5 /* Arial Narrow Bold Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arial Narrow Bold Italic.ttf"; sourceTree = "<group>"; };
-		8F37036D215E4E41006074C5 /* Arial Narrow.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arial Narrow.ttf"; sourceTree = "<group>"; };
-		8F37036E215E4E41006074C5 /* Arial Narrow Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arial Narrow Bold.ttf"; sourceTree = "<group>"; };
 		B5B74BC89CD6FF95A0F9CC34 /* Pods-RulerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RulerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RulerTests/Pods-RulerTests.release.xcconfig"; sourceTree = "<group>"; };
 		C60BC345215BF56F00CE2E98 /* Undirected Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Undirected Graph.swift"; sourceTree = "<group>"; };
 		C60BC347215C1C4500CE2E98 /* WorldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTests.swift; sourceTree = "<group>"; };
 		C6199B1E215E4412004C4344 /* UndirectedGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndirectedGraph.swift; sourceTree = "<group>"; };
 		C61BEAF92147BDBD0042EE12 /* Ruler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ruler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C61BEAFC2147BDBD0042EE12 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C61BEAFE2147BDBD0042EE12 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		C61BEB002147BDBD0042EE12 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C61BEB032147BDBD0042EE12 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C61BEB052147BDBD0042EE12 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -221,17 +203,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		8F37036A215E4E41006074C5 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				8F37036B215E4E41006074C5 /* Arial Narrow Italic.ttf */,
-				8F37036C215E4E41006074C5 /* Arial Narrow Bold Italic.ttf */,
-				8F37036D215E4E41006074C5 /* Arial Narrow.ttf */,
-				8F37036E215E4E41006074C5 /* Arial Narrow Bold.ttf */,
-			);
-			path = Fonts;
-			sourceTree = SOURCE_ROOT;
-		};
 		BD9B65689460A39B9A2C65AA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -280,8 +251,6 @@
 		C61BEAFB2147BDBD0042EE12 /* Ruler */ = {
 			isa = PBXGroup;
 			children = (
-				8F37036A215E4E41006074C5 /* Fonts */,
-				8F370363215E46DF006074C5 /* Images */,
 				C60BC344215BF52800CE2E98 /* New World Model Test */,
 				C6911868214FAE1900553624 /* UIParts */,
 				C6911865214FA9C200553624 /* Useful Extension */,
@@ -289,6 +258,7 @@
 				C61BEB402147F0AB0042EE12 /* MeasureLogic */,
 				C61BEB2C2147C8BB0042EE12 /* StatePattern */,
 				C61BEAFC2147BDBD0042EE12 /* AppDelegate.swift */,
+				C61BEAFE2147BDBD0042EE12 /* art.scnassets */,
 				C61BEB002147BDBD0042EE12 /* ViewController.swift */,
 				C61BEB022147BDBD0042EE12 /* Main.storyboard */,
 				C61BEB052147BDBD0042EE12 /* Assets.xcassets */,
@@ -500,17 +470,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C61BEAFF2147BDBD0042EE12 /* art.scnassets in Resources */,
 				C61BEB092147BDBD0042EE12 /* LaunchScreen.storyboard in Resources */,
-				8F37036F215E4E41006074C5 /* Arial Narrow Italic.ttf in Resources */,
-				8F370372215E4E41006074C5 /* Arial Narrow Bold Italic.ttf in Resources */,
-				8F370378215E4E41006074C5 /* Arial Narrow Bold.ttf in Resources */,
 				C61BEB062147BDBD0042EE12 /* Assets.xcassets in Resources */,
-<<<<<<< HEAD
-=======
-				C661D408215D332500D053A1 /* Info.plist in Resources */,
-				8F370367215E46DF006074C5 /* Images in Resources */,
-				8F370375215E4E41006074C5 /* Arial Narrow.ttf in Resources */,
->>>>>>> pr/2
 				C61BEB042147BDBD0042EE12 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -519,15 +481,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-<<<<<<< HEAD
-=======
-				8F370379215E4E41006074C5 /* Arial Narrow Bold.ttf in Resources */,
-				8F370376215E4E41006074C5 /* Arial Narrow.ttf in Resources */,
-				C661D426215D355600D053A1 /* Info.plist in Resources */,
-				8F370373215E4E41006074C5 /* Arial Narrow Bold Italic.ttf in Resources */,
-				8F370370215E4E41006074C5 /* Arial Narrow Italic.ttf in Resources */,
-				8F370368215E46DF006074C5 /* Images in Resources */,
->>>>>>> pr/2
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,11 +488,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F370374215E4E41006074C5 /* Arial Narrow Bold Italic.ttf in Resources */,
-				8F37037A215E4E41006074C5 /* Arial Narrow Bold.ttf in Resources */,
-				8F370369215E46DF006074C5 /* Images in Resources */,
-				8F370377215E4E41006074C5 /* Arial Narrow.ttf in Resources */,
-				8F370371215E4E41006074C5 /* Arial Narrow Italic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -858,14 +806,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 92Z9AMM275;
+				DEVELOPMENT_TEAM = 29M2K7MYPU;
 				INFOPLIST_FILE = Ruler/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = dev.mikavaa.com;
+				PRODUCT_BUNDLE_IDENTIFIER = Mikavaa.Ruler;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Ruler/MeasureLogic/Ruler-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -881,14 +829,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 92Z9AMM275;
+				DEVELOPMENT_TEAM = 29M2K7MYPU;
 				INFOPLIST_FILE = Ruler/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = dev.mikavaa.com;
+				PRODUCT_BUNDLE_IDENTIFIER = Mikavaa.Ruler;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Ruler/MeasureLogic/Ruler-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
