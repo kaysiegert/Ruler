@@ -18,7 +18,7 @@ extension BTree {
     }
 }
 
-internal final class UndirectedGraph<BranchValue: hasUniqueKey, EdgeValue: hasUniqueKey> {
+internal final class UndirectedGraph<BranchValue: hasUniqueKey, EdgeValue: hasUniqueKey>: CustomStringConvertible {
     
     fileprivate typealias Branch = (value: BranchValue, connections: [(index: Int, first: Bool)])
     fileprivate typealias Edge = (value: EdgeValue, first: Int, second: Int)
@@ -42,6 +42,12 @@ internal final class UndirectedGraph<BranchValue: hasUniqueKey, EdgeValue: hasUn
         }
         self.edgesList.removeAll()
         self.edgesTree.removeAll()
+    }
+    
+    internal final var description: String {
+        return "UndirectedGraph Start ==>\n\t --> \(self.branchesList.count) Branches\n\t Connections:" + self.edgesList.reduce("", { (tmp, edge) -> String in
+            return tmp + "\n\t # \(edge.pointee.first) to \(edge.pointee.second)"
+        }) + "\nUndirectedGraph End ==>"
     }
     
     internal static func singleton(from startBranch: BranchValue, with edgeValue: EdgeValue, to endBranch: BranchValue) -> UndirectedGraph<BranchValue, EdgeValue> {
@@ -270,11 +276,17 @@ internal final class UndirectedGraph<BranchValue: hasUniqueKey, EdgeValue: hasUn
     }
 }
 
-internal struct UndirectedGraphSet<BranchValue: hasUniqueKey, EdgeValue: hasUniqueKey> {
+internal struct UndirectedGraphSet<BranchValue: hasUniqueKey, EdgeValue: hasUniqueKey>: CustomStringConvertible {
     
     private var graphs = ContiguousArray<UndirectedGraph<BranchValue, EdgeValue>>.init()
     private var branchNodeTree = BTree<Int, Int>.init()
     private var edgeNodeTree = BTree<Int, Int>.init()
+    
+    internal var description: String {
+        return "\nUndirectedGraphSet Start ==> " + self.graphs.reduce("", { (tmp, graph) -> String in
+            return tmp + "\(graph)"
+        }) + "\nUndirectedGraphSet End ==>"
+    }
     
     internal mutating func insertConnection(from startNode: BranchValue, with edgeNode: EdgeValue, to endNode: BranchValue) {
         

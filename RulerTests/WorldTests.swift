@@ -19,6 +19,6 @@ final class WorldTests: RulerTests {
     
     final func testWorldFunctionInsert() {
         var world = UndirectedGraphSet<SCNNode, SCNNode>.init()
-        
+        print(world)
     }
 }
