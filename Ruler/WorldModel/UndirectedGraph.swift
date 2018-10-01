@@ -32,27 +32,48 @@ internal final class UndirectedGraph<BranchValue: hasUniqueKey, EdgeValue: hasUn
     private final var mutationCount = 0
     
     deinit {
-        self.branchesList.forEach { (branchPointer) in
-            branchPointer.deallocate()
-        }
         self.branchesList.removeAll()
         self.branchesTree.removeAll()
-        self.edgesList.forEach { (edgePointer) in
-            edgePointer.deallocate()
-        }
         self.edgesList.removeAll()
         self.edgesTree.removeAll()
     }
     
     internal final var description: String {
-        return "UndirectedGraph Start ==>\n\t --> \(self.branchesList.count) Branches\n\t Connections:" + self.edgesList.reduce("", { (tmp, edge) -> String in
+        let branchesString =  { () -> String in 
+            let result = self.branchesList.reduce(" [") { (tmp, branch) -> String in
+                return tmp + "\n\t\(branch.pointee.value.key),"
+            }
+            if result.count > 1 {
+                return result.dropLast() + "]"
+            }
+            return result + "]"
+        }()
+        let branchesTreeString = self.branchesTree.reduce("") { (tmp, arg) -> String in
+            let (_, arg1) = arg
+            let (listIndex, pointer) = arg1
+            return tmp + "(\(listIndex), \(pointer.pointee.value.key)), "
+        }
+        return "UndirectedGraph Start ==>\n\t --> Branches \(branchesString)\n\t \(branchesTreeString)\n\t Connections:" + self.edgesList.reduce("", { (tmp, edge) -> String in
             return tmp + "\n\t # \(edge.pointee.first) to \(edge.pointee.second)"
         }) + "\nUndirectedGraph End ==>"
     }
     
     internal static func singleton(from startBranch: BranchValue, with edgeValue: EdgeValue, to endBranch: BranchValue) -> UndirectedGraph<BranchValue, EdgeValue> {
         let newGraph = UndirectedGraph<BranchValue, EdgeValue>.init()
-        
+        guard startBranch.key != endBranch.key else {
+            let edge = (edgeValue, 0, 0)
+            let edgePointer = UnsafeMutablePointer<Edge>.allocate(capacity: 1)
+            edgePointer.initialize(to: edge)
+            newGraph.edgesList.append(edgePointer)
+            newGraph.edgesTree.insert((edgeValue.key, (0, edgePointer)))
+            
+            let concreteStartBranch = (value: startBranch, [(index: 0, first: true), (index: 0, first: false)])
+            let startBranchPointer = UnsafeMutablePointer<Branch>.allocate(capacity: 1)
+            startBranchPointer.initialize(to: concreteStartBranch)
+            newGraph.branchesList.append(startBranchPointer)
+            newGraph.branchesTree.insert((startBranch.key, (0, startBranchPointer)))
+            return newGraph
+        }
         let edge = (edgeValue, 0, 1)
         let edgePointer = UnsafeMutablePointer<Edge>.allocate(capacity: 1)
         edgePointer.initialize(to: edge)
@@ -78,6 +99,7 @@ internal final class UndirectedGraph<BranchValue: hasUniqueKey, EdgeValue: hasUn
         case startAnkerFound(Index)
         case endAnkerFound(Index)
         case edgeInserted
+        case selfEdgeInserted
     }
     
     internal struct Index {
@@ -102,15 +124,15 @@ internal final class UndirectedGraph<BranchValue: hasUniqueKey, EdgeValue: hasUn
         
         for index in 0..<undirectedGraph.branchesTree.count {
             let currentTreeValue = undirectedGraph.branchesTree.element(atOffset: index).1
-            _ = undirectedGraph.branchesTree.setValue(atOffset: index, to: (currentTreeValue.listIndex + self.edgesList.count, currentTreeValue.1))
+            _ = undirectedGraph.branchesTree.setValue(atOffset: index, to: (currentTreeValue.listIndex + self.branchesList.count, currentTreeValue.1))
         }
         for index in 0..<undirectedGraph.edgesTree.count {
             let currentTreeValue = undirectedGraph.edgesTree.element(atOffset: index).1
-            _ = undirectedGraph.edgesTree.setValue(atOffset: index, to: (currentTreeValue.listIndex + self.branchesList.count, currentTreeValue.1))
+            _ = undirectedGraph.edgesTree.setValue(atOffset: index, to: (currentTreeValue.listIndex + self.edgesList.count, currentTreeValue.1))
         }
         
-        self.branchesTree = self.branchesTree.union(undirectedGraph.branchesTree, by: .countingMatches)
-        self.edgesTree = self.edgesTree.union(undirectedGraph.edgesTree, by: .countingMatches)
+        self.branchesTree = self.branchesTree.union(undirectedGraph.branchesTree, by: .groupingMatches)
+        self.edgesTree = self.edgesTree.union(undirectedGraph.edgesTree, by: .groupingMatches)
         self.branchesList.append(contentsOf: undirectedGraph.branchesList)
         self.edgesList.append(contentsOf: undirectedGraph.edgesList)
         
@@ -119,6 +141,21 @@ internal final class UndirectedGraph<BranchValue: hasUniqueKey, EdgeValue: hasUn
     }
     
     internal final func insertConnection(from startBranch: BranchValue, with edgeValue: EdgeValue, to endBranch: BranchValue) -> InsertionResult {
+        guard startBranch.key != endBranch.key else {
+            guard let knownIndex = self.branchesTree.search(for: startBranch.key)?.listIndex else {
+                return .noAnkerFound
+            }
+            let edgeIndex = self.edgesList.count
+            let edge = (edgeValue, knownIndex, knownIndex)
+            let edgePointer = UnsafeMutablePointer<Edge>.allocate(capacity: 1)
+            edgePointer.initialize(to: edge)
+            self.edgesList.append(edgePointer)
+            self.edgesTree.insert((edgeValue.key, (edgeIndex, edgePointer)))
+            
+            self.branchesList[knownIndex].pointee.connections.append((edgeIndex, true))
+            self.branchesList[knownIndex].pointee.connections.append((edgeIndex, false))
+            return .selfEdgeInserted
+        }
         if let knownStartIndex = self.branchesTree.search(for: startBranch.key)?.listIndex {
             self.mutationCount += 1
             guard let knownEndIndex = self.branchesTree.search(for: endBranch.key)?.listIndex else {
@@ -284,8 +321,16 @@ internal struct UndirectedGraphSet<BranchValue: hasUniqueKey, EdgeValue: hasUniq
     
     internal var description: String {
         return "\nUndirectedGraphSet Start ==> " + self.graphs.reduce("", { (tmp, graph) -> String in
-            return tmp + "\(graph)"
+            return tmp + "\n\(graph)"
         }) + "\nUndirectedGraphSet End ==>"
+    }
+    
+    internal subscript(index: Int) -> UndirectedGraph<BranchValue, EdgeValue> {
+        return self.graphs[index]
+    }
+    
+    internal var count: Int {
+        return self.graphs.count
     }
     
     internal mutating func insertConnection(from startNode: BranchValue, with edgeNode: EdgeValue, to endNode: BranchValue) {
@@ -294,6 +339,11 @@ internal struct UndirectedGraphSet<BranchValue: hasUniqueKey, EdgeValue: hasUniq
             guard let possibleEndNodeGraph = self.branchNodeTree.search(for: endNode.key) else {
                 _ = self.graphs[possibleStartNodeGraph].insertConnection(from: startNode, with: edgeNode, to: endNode)
                 self.branchNodeTree.insert((endNode.key, possibleStartNodeGraph))
+                self.edgeNodeTree.insert((edgeNode.key, possibleStartNodeGraph))
+                return
+            }
+            guard possibleEndNodeGraph != possibleStartNodeGraph else {
+                _ = self.graphs[possibleStartNodeGraph].insertConnection(from: startNode, with: edgeNode, to: endNode)
                 self.edgeNodeTree.insert((edgeNode.key, possibleStartNodeGraph))
                 return
             }
