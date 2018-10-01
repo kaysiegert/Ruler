@@ -14,6 +14,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
     
+    private var labelInstruction: UILabel!
+    private var labelMeasurement: UILabel!
+    private var buttonUseResult: UIButton!
+    
     private final let handler = StateHandler.init()
     
     override func viewDidLoad() {
@@ -29,12 +33,88 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.automaticallyUpdatesLighting = true
         sceneView.autoenablesDefaultLighting = true
         
+        setupUI()
+        
         _ = self.handler.startState.add(view: self.view, sceneView: self.sceneView, handler: self.handler)
         _ = self.handler.measuringState.add(view: self.view, sceneView: self.sceneView, handler: self.handler)
         _ = self.handler.walkingState.add(view: self.view, sceneView: self.sceneView, handler: self.handler)
         _ = self.handler.measuringState2.add(view: self.view, sceneView: self.sceneView, handler: self.handler)
         _ = self.handler.settingState.add(view: self.view, sceneView: self.sceneView, handler: self.handler)
         self.handler.currentState = self.handler.startState
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
+    override var shouldAutorotate: Bool {
+        return false
+    }
+    
+    func setupUI(){
+        
+        let ui = UIView.init(frame: CGRect(x: 0, y:0, width: view.frame.size.width, height: view.frame.size.height))
+        ui.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        view.addSubview(ui)
+        
+        let header = UIView.init(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 60))
+        header.backgroundColor = .black
+        ui.addSubview(header)
+        
+        let btnCancel = UIButton.init(frame: CGRect(x: view.frame.size.width-50, y: 10, width: 40, height: 40))
+        btnCancel.setImage(UIImage.init(named: "Images/btnCancel.png"), for: .normal)
+        // add callback
+        ui.addSubview(btnCancel)
+        
+        let arrow = UIImageView.init(image: UIImage.init(named: "Images/arrow-top-left.png"))
+        arrow.frame = CGRect(x: 5, y: 5, width: arrow.frame.size.width, height: arrow.frame.size.height)
+        ui.addSubview(arrow)
+        
+        let overlay = UIView.init(frame: CGRect(x: 10, y: arrow.frame.origin.y+arrow.frame.size.height, width: view.frame.size.width-20, height: 220))
+        overlay.backgroundColor = UIColor.init(red: 1, green: 222/255, blue: 0, alpha: 1)
+        overlay.layer.cornerRadius = 5
+        overlay.clipsToBounds = true
+        ui.addSubview(overlay)
+        
+        labelInstruction = UILabel.init(frame: CGRect(x: 10, y: 10, width: overlay.frame.size.width-20, height: 60))
+        labelInstruction.backgroundColor = .clear
+        labelInstruction.textColor = .darkGray
+        labelInstruction.numberOfLines = 4;
+        labelInstruction.textAlignment = .center
+        labelInstruction.font = UIFont.init(name: "ArialNarrow-Bold", size: 14)
+        labelInstruction.text = "Sie können das Maß jetzt übernehmen. Um eine neue Messung zu starten, tippen Sie erneut auf den unteren Bildschirmbereich."
+        overlay.addSubview(labelInstruction)
+        
+        labelMeasurement = UILabel.init(frame: CGRect(x: 10, y: 70, width: overlay.frame.size.width-20, height: 40))
+        labelMeasurement.backgroundColor = .clear
+        labelMeasurement.textColor = .darkGray
+        labelMeasurement.textAlignment = .center
+        labelMeasurement.font = UIFont.init(name: "ArialNarrow-Bold", size: 30)
+        labelMeasurement.text = "123,45 cm"
+        overlay.addSubview(labelMeasurement)
+        
+        buttonUseResult = UIButton.init(frame: CGRect(x: 70, y: 120, width: overlay.frame.size.width-140, height: 50))
+        buttonUseResult.backgroundColor = .darkGray
+        buttonUseResult.layer.cornerRadius = 5
+        buttonUseResult.setTitleColor(overlay.backgroundColor, for: .normal)
+        buttonUseResult.setTitleColor(.white, for: .highlighted)
+        buttonUseResult.titleLabel?.font = UIFont.init(name: "ArialNarrow-BoldItalic", size: 18)
+        buttonUseResult.setTitle("Maß übernehmen", for: .normal)
+        overlay.addSubview(buttonUseResult)
+        
+        let labelInfo = UILabel.init(frame: CGRect(x: 10, y: 185, width: overlay.frame.size.width-20, height: 20))
+        labelInfo.backgroundColor = .clear
+        labelInfo.textColor = .darkGray
+        labelInfo.textAlignment = .center
+        labelInfo.font = UIFont.init(name: "ArialNarrow", size: 12)
+        labelInfo.text = "Bitte beachten Sie, dass es sich um etwaige Werte handelt."
+        overlay.addSubview(labelInfo)
+        
+        let tapGesture = UIImageView.init(frame: CGRect(x: 0, y: view.frame.size.height/2, width: view.frame.size.width, height: view.frame.size.height/2))
+        tapGesture.image = UIImage.init(named: "Images/tapGesture.png")
+        tapGesture.contentMode = .center
+        ui.addSubview(tapGesture)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
