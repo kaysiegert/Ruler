@@ -19,7 +19,7 @@ extension SCNNode: FastComparable {
     }
 }
 
-extension SCNNode: hasKey {
+extension SCNNode: hasUniqueKey {
     var key: Int {
         return self.hash
     }
@@ -118,5 +118,15 @@ internal final class WorldTests: RulerTests {
         }
         print(b.element(atOffset: idx).0)
         assert(90 == b.element(atOffset: idx).1)
+    }
+    
+    final func testFinalWorld() {
+        let start = SCNNode.init()
+        let g = UndirectedGraph<SCNNode, SCNNode>.singleton(from: start, with: SCNNode.init(), to: SCNNode.init())
+        self.measure {
+            for _ in 0...count {
+                _ = g.insertConnection(from: start, with: SCNNode.init(), to: SCNNode.init())
+            }
+        }
     }
 }

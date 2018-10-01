@@ -39,6 +39,9 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "WorldTests/testArray()">
+               </Test>
+               <Test
                   Identifier = "WorldTests/testExample()">
                </Test>
                <Test
