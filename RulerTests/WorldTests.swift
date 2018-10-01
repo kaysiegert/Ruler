@@ -27,9 +27,12 @@ final class WorldTests: RulerTests {
         print(world)
         let n3 = SCNNode.init()
         let l2 = SCNNode.init()
-        world.insertConnection(from: n3, with: l2, to: n3)
+        world.insertConnection(from: n3, with: l2, to: n2)
         print(world)
         world.insertConnection(from: n1, with: SCNNode.init(), to: n3)
         print(world)
+        assert(world.count == 1)
+        let worker = world.getWorker(for: n1)!
+        print(worker.triangles)
     }
 }
