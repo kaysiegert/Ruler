@@ -310,6 +310,33 @@ internal final class UndirectedGraph<BranchValue: hasUniqueKey, EdgeValue: hasUn
             }).triangles
         }
         
+        //: knownBranches noch für alle Rekursionzweige verfügbar machen
+        private func _cycles(knownBranches: [BranchValue]) -> [[BranchValue]] {
+            guard knownBranches.contains(where: { (branch) -> Bool in
+                return branch.key == self._branch.pointee.value.key
+            }) else {
+                return self._branch.pointee.connections.reduce([[BranchValue]].init(), { (tmp, arg) -> [[BranchValue]] in
+                    let (index, first) = arg
+                    let next: BranchValue
+                    if first {
+                        next = self.graph.branchesList[self.graph.edgesList[index].pointee.second].pointee.value
+                    } else {
+                        next = self.graph.branchesList[self.graph.edgesList[index].pointee.first].pointee.value
+                    }
+                    //: Hier lässt sich noch Performance rausschlagen durch eine neue Funktion die dann rekursiv läuft
+                    guard let branchWorker = self.graph.createWorker(for: next) else {
+                        return tmp
+                    }
+                    return tmp + branchWorker._cycles(knownBranches: knownBranches + [self._branch.pointee.value])
+                })
+            }
+            return [knownBranches]
+        }
+        
+        internal var cycles: [[BranchValue]] {
+            return self._cycles(knownBranches: [BranchValue].init())
+        }
+        
     }
 }
 
