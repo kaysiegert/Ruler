@@ -15,11 +15,11 @@ internal final class MeasureState_StartState: MeasureState_General {
             
             let handler = controller.handler
             
-            handler.header.isHidden = true
-            handler.cancelButton.isHidden = true
-            handler.arrow.isHidden = true
-            handler.overlay.isHidden = true
-            handler.tapGestureImageView.isHidden = true
+            handler.header.alpha = 0.0
+            handler.cancelButton.alpha = 0.0
+            handler.arrow.alpha = 0.0
+            handler.overlay.alpha = 0.0
+            handler.tapGestureImageView.alpha = 0.0
             
             let view = controller.viewController.view!
             view.addSubview(handler.header)
@@ -32,13 +32,14 @@ internal final class MeasureState_StartState: MeasureState_General {
             handler.overlay.addSubview(handler.instructionLabel)
             handler.overlay.addSubview(handler.infoLabel)
             
-            let fadeTime = 0.5
+            let fadeTime = 1.0
             UIView.animate(withDuration: fadeTime, animations: {
-                handler.header.isHidden = false
-                handler.cancelButton.isHidden = false
-                handler.arrow.isHidden = false
-                handler.overlay.isHidden = false
-                handler.tapGestureImageView.isHidden = false
+                handler.header.alpha = 1.0
+                handler.cancelButton.alpha = 1.0
+                handler.arrow.alpha = 1.0
+                handler.overlay.alpha = 1.0
+                handler.tapGestureImageView.alpha = 1.0
+                
             })
         }
     }
