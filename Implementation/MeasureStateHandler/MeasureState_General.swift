@@ -15,6 +15,7 @@ internal class MeasureState_General {
     
     internal func appaerState() {}
     internal func disappaerState() {}
+    internal func handleTouchesBegan(at point: CGPoint) {}
     
     internal final func register(controller: MeasureController) -> Bool {
         guard self.view != nil else {

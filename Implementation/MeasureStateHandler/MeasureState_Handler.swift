@@ -103,7 +103,7 @@ internal final class MeasureState_Handler {
         label.textColor = .darkGray
         label.textAlignment = .center
         label.font = UIFont.init(name: "ArialNarrow-Bold", size: 30)
-        label.text = "123,45 cm"
+        label.text = "0,00 cm"
         return label
     }()
     

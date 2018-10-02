@@ -18,13 +18,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     private var labelMeasurement: UILabel!
     private var buttonUseResult: UIButton!
     
-    private final let handler = StateHandler.init()
+    private final var controller: MeasureController! = nil
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         let m = MeasureController.init(viewController: self)
         m.setupMeasurement()
+        self.controller = m
         /*
         // Set the view's delegate
         sceneView.delegate = self
@@ -132,15 +133,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     override final func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
         self.handler.currentState.handleWillRotate()
     }
-    
+    */
     override final func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touchLocation = touches.first else {
             return
         }
         let touchPoint = touchLocation.location(in: self.view)
-        self.handler.currentState.handleTouchesBegan(at: touchPoint)
+        self.controller.handler.currentState.handleTouchesBegan(at: touchPoint)
     }
-    
+    /*
     override final func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touchLocation = touches.first else {
             return
