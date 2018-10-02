@@ -92,6 +92,7 @@
 		C672DD9821635FBC0082CDE1 /* MeasureState_WalkingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C672DD9721635FBC0082CDE1 /* MeasureState_WalkingState.swift */; };
 		C672DD9A216360290082CDE1 /* MeasureState_ManualMeasureState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C672DD99216360290082CDE1 /* MeasureState_ManualMeasureState.swift */; };
 		C672DD9D216364610082CDE1 /* Extension_SCNNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C672DD9C216364610082CDE1 /* Extension_SCNNode.swift */; };
+		C672DD9F2163818A0082CDE1 /* MeasureState_EndState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C672DD9E2163818A0082CDE1 /* MeasureState_EndState.swift */; };
 		C6911862214F964A00553624 /* World  .swift in Sources */ = {isa = PBXBuildFile; fileRef = C6911861214F964A00553624 /* World  .swift */; };
 		C6911864214F9C9C00553624 /* MeasuringState2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6911863214F9C9C00553624 /* MeasuringState2.swift */; };
 		C6911867214FA9D600553624 /* UISegementedControl Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6911866214FA9D600553624 /* UISegementedControl Extension.swift */; };
@@ -181,6 +182,7 @@
 		C672DD9721635FBC0082CDE1 /* MeasureState_WalkingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureState_WalkingState.swift; sourceTree = "<group>"; };
 		C672DD99216360290082CDE1 /* MeasureState_ManualMeasureState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureState_ManualMeasureState.swift; sourceTree = "<group>"; };
 		C672DD9C216364610082CDE1 /* Extension_SCNNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_SCNNode.swift; sourceTree = "<group>"; };
+		C672DD9E2163818A0082CDE1 /* MeasureState_EndState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureState_EndState.swift; sourceTree = "<group>"; };
 		C6911861214F964A00553624 /* World  .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "World  .swift"; sourceTree = "<group>"; };
 		C6911863214F9C9C00553624 /* MeasuringState2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasuringState2.swift; sourceTree = "<group>"; };
 		C6911866214FA9D600553624 /* UISegementedControl Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegementedControl Extension.swift"; sourceTree = "<group>"; };
@@ -396,6 +398,7 @@
 				C672DD9521635F4A0082CDE1 /* MeasureState_StartState.swift */,
 				C672DD9721635FBC0082CDE1 /* MeasureState_WalkingState.swift */,
 				C672DD99216360290082CDE1 /* MeasureState_ManualMeasureState.swift */,
+				C672DD9E2163818A0082CDE1 /* MeasureState_EndState.swift */,
 			);
 			path = MeasureStateHandler;
 			sourceTree = "<group>";
@@ -694,6 +697,7 @@
 				C61BEB2E2147C8CC0042EE12 /* State.swift in Sources */,
 				C61BEB3B2147CEC60042EE12 /* MeasuringState.swift in Sources */,
 				C6199B1F215E4412004C4344 /* UndirectedGraph & UndirectedGraphSet.swift in Sources */,
+				C672DD9F2163818A0082CDE1 /* MeasureState_EndState.swift in Sources */,
 				C661D40F215D332500D053A1 /* BTreeIterator.swift in Sources */,
 				C661D40B215D332500D053A1 /* List.swift in Sources */,
 				C661D409215D332500D053A1 /* Weak.swift in Sources */,

@@ -15,6 +15,7 @@ internal final class MeasureState_Handler {
     internal final let startState = MeasureState_StartState.init()
     internal final let walkingState = MeasureState_WalkingState.init()
     internal final let manualMeasurementState = MeasureState_ManualMeasureState.init()
+    internal final let endState = MeasureState_EndState.init()
     
     internal final var world = UndirectedGraphSet<SCNNode, SCNNode>.init()
     

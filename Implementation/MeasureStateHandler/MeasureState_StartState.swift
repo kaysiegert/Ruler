@@ -41,6 +41,8 @@ internal final class MeasureState_StartState: MeasureState_General {
                 handler.tapGestureImageView.alpha = 1.0
                 
             })
+            
+            controller.handler.currentState = controller.handler.walkingState
         }
     }
 }

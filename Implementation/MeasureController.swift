@@ -15,10 +15,16 @@ internal final class MeasureController: NSObject {
     internal final let handler = MeasureState_Handler.init()
     internal final let viewController: UIViewController & ARSCNViewDelegate
     
+    private var firstCall = true
+    
     internal final func setupMeasurement() {
-        _ = self.handler.startState.register(controller: self)
-        _ = self.handler.walkingState.register(controller: self)
-        _ = self.handler.manualMeasurementState.register(controller: self)
+        if self.firstCall {
+            _ = self.handler.startState.register(controller: self)
+            _ = self.handler.walkingState.register(controller: self)
+            _ = self.handler.manualMeasurementState.register(controller: self)
+            _ = self.handler.endState.register(controller: self)
+            self.firstCall = false
+        }
         self.handler.currentState = self.handler.startState
     }
     
