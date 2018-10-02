@@ -12,7 +12,7 @@ import ARKit
 
 class ViewController: UIViewController, ARSCNViewDelegate {
 
-    @IBOutlet var sceneView: ARSCNView!
+    //@IBOutlet var sceneView: ARSCNView!
     
     private var labelInstruction: UILabel!
     private var labelMeasurement: UILabel!
@@ -23,6 +23,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        let m = MeasureController.init(viewController: self)
+        m.setupMeasurement()
+        /*
         // Set the view's delegate
         sceneView.delegate = self
         // Create a new scene
@@ -39,7 +42,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         _ = self.handler.walkingState.add(view: self.view, sceneView: self.sceneView, handler: self.handler)
         _ = self.handler.measuringState2.add(view: self.view, sceneView: self.sceneView, handler: self.handler)
         _ = self.handler.settingState.add(view: self.view, sceneView: self.sceneView, handler: self.handler)
-        self.handler.currentState = self.handler.startState
+        self.handler.currentState = self.handler.startState*/
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -116,23 +119,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // Create a session configuration
-        let configuration = ARWorldTrackingConfiguration()
-
-        // Run the view's session
-        sceneView.session.run(configuration)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        // Pause the view's session
-        sceneView.session.pause()
+   
     }
-    
+    /*
     override final func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
         self.handler.currentState.handleWillRotate()
     }
@@ -169,5 +165,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         self.handler.currentState.handleTouchesEnded(at: touchPoint)
     }
     // MARK: - ARSCNViewDelegate
+ */
 
 }
