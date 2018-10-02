@@ -42,8 +42,12 @@ internal final class MeasureState_StartState: MeasureState_General {
                 handler.tapGestureImageView.alpha = 1.0
                 
             })
-            
-            controller.handler.currentState = controller.handler.walkingState
+        }
+    }
+    
+    override internal final func handleTouchesBegan(at point: CGPoint) {
+        self.interact { (controller) in
+            controller.handler.currentState = controller.handler.manualMeasurementState
         }
     }
 }

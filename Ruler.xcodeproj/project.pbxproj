@@ -93,6 +93,9 @@
 		C672DD9A216360290082CDE1 /* MeasureState_ManualMeasureState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C672DD99216360290082CDE1 /* MeasureState_ManualMeasureState.swift */; };
 		C672DD9D216364610082CDE1 /* Extension_SCNNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C672DD9C216364610082CDE1 /* Extension_SCNNode.swift */; };
 		C672DD9F2163818A0082CDE1 /* MeasureState_EndState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C672DD9E2163818A0082CDE1 /* MeasureState_EndState.swift */; };
+		C672DDA22163B5BE0082CDE1 /* ResultButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C672DDA12163B5BE0082CDE1 /* ResultButton.swift */; };
+		C672DDA42163B7B00082CDE1 /* CancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C672DDA32163B7B00082CDE1 /* CancelButton.swift */; };
+		C672DDA62163B9E60082CDE1 /* TapGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C672DDA52163B9E60082CDE1 /* TapGestureView.swift */; };
 		C6911862214F964A00553624 /* World  .swift in Sources */ = {isa = PBXBuildFile; fileRef = C6911861214F964A00553624 /* World  .swift */; };
 		C6911864214F9C9C00553624 /* MeasuringState2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6911863214F9C9C00553624 /* MeasuringState2.swift */; };
 		C6911867214FA9D600553624 /* UISegementedControl Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6911866214FA9D600553624 /* UISegementedControl Extension.swift */; };
@@ -183,6 +186,9 @@
 		C672DD99216360290082CDE1 /* MeasureState_ManualMeasureState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureState_ManualMeasureState.swift; sourceTree = "<group>"; };
 		C672DD9C216364610082CDE1 /* Extension_SCNNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_SCNNode.swift; sourceTree = "<group>"; };
 		C672DD9E2163818A0082CDE1 /* MeasureState_EndState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureState_EndState.swift; sourceTree = "<group>"; };
+		C672DDA12163B5BE0082CDE1 /* ResultButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultButton.swift; sourceTree = "<group>"; };
+		C672DDA32163B7B00082CDE1 /* CancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButton.swift; sourceTree = "<group>"; };
+		C672DDA52163B9E60082CDE1 /* TapGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureView.swift; sourceTree = "<group>"; };
 		C6911861214F964A00553624 /* World  .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "World  .swift"; sourceTree = "<group>"; };
 		C6911863214F9C9C00553624 /* MeasuringState2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasuringState2.swift; sourceTree = "<group>"; };
 		C6911866214FA9D600553624 /* UISegementedControl Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegementedControl Extension.swift"; sourceTree = "<group>"; };
@@ -393,6 +399,7 @@
 		C672DD9021635DB00082CDE1 /* MeasureStateHandler */ = {
 			isa = PBXGroup;
 			children = (
+				C672DDA02163B5990082CDE1 /* UserInterface */,
 				C672DD9121635DC70082CDE1 /* MeasureState_Handler.swift */,
 				C672DD9321635F1D0082CDE1 /* MeasureState_General.swift */,
 				C672DD9521635F4A0082CDE1 /* MeasureState_StartState.swift */,
@@ -409,6 +416,16 @@
 				C672DD9C216364610082CDE1 /* Extension_SCNNode.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C672DDA02163B5990082CDE1 /* UserInterface */ = {
+			isa = PBXGroup;
+			children = (
+				C672DDA12163B5BE0082CDE1 /* ResultButton.swift */,
+				C672DDA32163B7B00082CDE1 /* CancelButton.swift */,
+				C672DDA52163B9E60082CDE1 /* TapGestureView.swift */,
+			);
+			path = UserInterface;
 			sourceTree = "<group>";
 		};
 		C6911860214F962D00553624 /* WorldModel */ = {
@@ -666,6 +683,7 @@
 				C661D40C215D332500D053A1 /* BridgedList.swift in Sources */,
 				C672DD9D216364610082CDE1 /* Extension_SCNNode.swift in Sources */,
 				C61BEB3F2147E1410042EE12 /* StateHandler.swift in Sources */,
+				C672DDA22163B5BE0082CDE1 /* ResultButton.swift in Sources */,
 				C661D415215D332500D053A1 /* Compatibility.swift in Sources */,
 				C61BEB452147F1110042EE12 /* PlaneDetector.mm in Sources */,
 				C6911867214FA9D600553624 /* UISegementedControl Extension.swift in Sources */,
@@ -680,6 +698,7 @@
 				C61BEB302147C92C0042EE12 /* StartState.swift in Sources */,
 				C661D412215D332500D053A1 /* BTreeMerger.swift in Sources */,
 				C661D3EB215CA76900D053A1 /* Undirected  Graph.swift in Sources */,
+				C672DDA42163B7B00082CDE1 /* CancelButton.swift in Sources */,
 				C672DD9A216360290082CDE1 /* MeasureState_ManualMeasureState.swift in Sources */,
 				C661D411215D332500D053A1 /* Map.swift in Sources */,
 				C672DD8F21635D220082CDE1 /* MeasureController.swift in Sources */,
@@ -700,6 +719,7 @@
 				C672DD9F2163818A0082CDE1 /* MeasureState_EndState.swift in Sources */,
 				C661D40F215D332500D053A1 /* BTreeIterator.swift in Sources */,
 				C661D40B215D332500D053A1 /* List.swift in Sources */,
+				C672DDA62163B9E60082CDE1 /* TapGestureView.swift in Sources */,
 				C661D409215D332500D053A1 /* Weak.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

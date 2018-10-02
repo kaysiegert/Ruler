@@ -60,10 +60,10 @@ internal final class MeasureState_Handler {
         return header
     }()
     
-    internal final lazy var cancelButton = { () -> UIButton in
-        var button = UIButton.init()
+    internal final lazy var cancelButton = { () -> CancelButton in
+        var button = CancelButton.init(frame: CGRect.init(), handler: self)
         self.currentState.interact({ (controller) in
-            button = UIButton.init(frame: CGRect(x: controller.viewController.view.frame.size.width-50, y: 10, width: 40, height: 40))
+            button = CancelButton.init(frame: CGRect(x: controller.viewController.view.frame.size.width-50, y: 10, width: 40, height: 40), handler: self)
             button.setImage(UIImage.init(named: "Images/btnCancel.png"), for: .normal)
         })
         return button
@@ -107,14 +107,15 @@ internal final class MeasureState_Handler {
         return label
     }()
     
-    internal final lazy var resultButton = { () -> UIButton in
-        let button = UIButton.init(frame: CGRect(x: 70, y: 120, width: self.overlay.frame.size.width-140, height: 50))
+    internal final lazy var resultButton = { () -> ResultButton in
+        let button = ResultButton.init(frame: CGRect(x: 70, y: 120, width: self.overlay.frame.size.width-140, height: 50), handler: self)
         button.backgroundColor = .darkGray
         button.layer.cornerRadius = 5
         button.setTitleColor(self.overlay.backgroundColor, for: .normal)
         button.setTitleColor(.white, for: .highlighted)
         button.titleLabel?.font = UIFont.init(name: "ArialNarrow-BoldItalic", size: 18)
         button.setTitle("Maß übernehmen", for: .normal)
+        button.isEnabled = false
         return button
     }()
     
@@ -131,7 +132,7 @@ internal final class MeasureState_Handler {
     internal final lazy var tapGestureImageView = { () -> UIImageView in
         var gesture = UIImageView.init()
         self.currentState.interact({ (controller) in
-            gesture = UIImageView.init(frame: CGRect(x: 0, y: controller.viewController.view.frame.size.height/2, width: controller.viewController.view.frame.size.width, height: controller.viewController.view.frame.size.height/2))
+            gesture = UIImageView.init(frame: CGRect(x: 0, y: controller.viewController.view.frame.size.height / 2, width: controller.viewController.view.frame.size.width, height: controller.viewController.view.frame.size.height / 2))
             gesture.image = UIImage.init(named: "Images/tapGesture.png")
             gesture.contentMode = .center
         })

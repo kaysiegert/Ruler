@@ -8,6 +8,8 @@
 
 import Foundation
 
+internal var currentDistance: Float = 0.0
+
 internal final class MeasureState_ManualMeasureState: MeasureState_General {
  
     private final var timer = Timer.init()
@@ -31,7 +33,7 @@ internal final class MeasureState_ManualMeasureState: MeasureState_General {
         }
         self.interact { (controller) in
             let endValue = controller.handler.sceneView.unprojectPoint(SCNVector3Zero)
-            print("Distanz: \(endValue.distanceFromPos(pos: startValue))")
+            currentDistance = endValue.distanceFromPos(pos: startValue)
             controller.handler.currentState = controller.handler.walkingState
         }
     }
