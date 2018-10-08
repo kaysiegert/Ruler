@@ -47,42 +47,6 @@ internal final class MeasureState_ManualMeasureState: MeasureState_General {
                             return
                         }
                         controller.handler.measurementLabel.text = "\(((endValue.distanceFromPos(pos: startValue) * 10000).rounded() / 100).rounded()) cm"
-                        /* Test
-                        if let safeEnd = self.lastEnd {
-                            guard let safeTmp = self.tmpDifference else {
-                                let first = endValue.distanceFromPos(pos: startValue)
-                                let second = safeEnd.distanceFromPos(pos: startValue)
-                                self.tmpDifference = { () -> Float in
-                                    let r = first - second
-                                    if r >= 0 {
-                                        return r
-                                    } else {
-                                        return r * -1
-                                    }
-                                }()
-                                self.lastEnd = endValue
-                                return
-                            }
-                            let first = endValue.distanceFromPos(pos: startValue)
-                            let second = safeEnd.distanceFromPos(pos: startValue)
-                            let currentDistance = { () -> Float in
-                                let r = first - second
-                                if r >= 0 {
-                                    return r
-                                } else {
-                                    return r * -1
-                                }
-                            }()
-                            self.tmpDifference = currentDistance
-                            self.lastEnd = endValue
-                            if currentDistance <= safeTmp * 1.05 {
-                                print(first)
-                            }
-                            
-                        } else {
-                            self.lastEnd = endValue
-                        }
-                        // Ende Test*/
                     })
                 })
             }
