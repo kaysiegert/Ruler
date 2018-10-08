@@ -14,6 +14,9 @@ internal final class MeasureState_WalkingState: MeasureState_General {
         print("WalkingState")
         self.interact { (controller) in
             controller.handler.resultButton.isEnabled = true
+            UIView.animate(withDuration: 0.5, animations: {
+                controller.handler.resultButton.alpha = 1.0
+            })
         }
     }
     
@@ -26,6 +29,9 @@ internal final class MeasureState_WalkingState: MeasureState_General {
     override internal final func disappaerState() {
         self.interact { (controller) in
             controller.handler.resultButton.isEnabled = false
+            UIView.animate(withDuration: 0.5, animations: {
+                controller.handler.resultButton.alpha = 0.3
+            })
         }
     }
 }

@@ -21,6 +21,8 @@ internal final class MeasureState_StartState: MeasureState_General {
             handler.overlay.alpha = 0.0
             handler.tapGestureImageView.alpha = 0.0
             
+            handler.resultButton.alpha = 0.3
+            
             let view = controller.viewController.view!
             view.addSubview(handler.sceneView)
             view.addSubview(handler.header)

@@ -102,6 +102,8 @@
 		C691186A214FAE3C00553624 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6911869214FAE3C00553624 /* SegmentedControl.swift */; };
 		C6B8972721510FD2006F5EC0 /* ARSCNViewPersonal Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B8972621510FD2006F5EC0 /* ARSCNViewPersonal Extension.swift */; };
 		C6B8972B21512E49006F5EC0 /* SettingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B8972A21512E49006F5EC0 /* SettingState.swift */; };
+		C6CA8DB5216B5229002F6092 /* MeasureState_SettingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CA8DB4216B5229002F6092 /* MeasureState_SettingState.swift */; };
+		C6CA8DB7216B5242002F6092 /* MeasureState_DrawState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CA8DB6216B5242002F6092 /* MeasureState_DrawState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -195,6 +197,8 @@
 		C6911869214FAE3C00553624 /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		C6B8972621510FD2006F5EC0 /* ARSCNViewPersonal Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARSCNViewPersonal Extension.swift"; sourceTree = "<group>"; };
 		C6B8972A21512E49006F5EC0 /* SettingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingState.swift; sourceTree = "<group>"; };
+		C6CA8DB4216B5229002F6092 /* MeasureState_SettingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureState_SettingState.swift; sourceTree = "<group>"; };
+		C6CA8DB6216B5242002F6092 /* MeasureState_DrawState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureState_DrawState.swift; sourceTree = "<group>"; };
 		CC91902F2A57D709A05F4421 /* Pods_RulerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RulerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD6A3204AAE23CBD9C6D4822 /* Pods_RulerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RulerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9220FCB4DA88A232550BBAD /* Pods_Ruler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ruler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -399,12 +403,13 @@
 		C672DD9021635DB00082CDE1 /* MeasureStateHandler */ = {
 			isa = PBXGroup;
 			children = (
+				C6CA8DB3216B5206002F6092 /* Automatic Measurement */,
+				C6CA8DB2216B51E8002F6092 /* Manual Measurement */,
 				C672DDA02163B5990082CDE1 /* UserInterface */,
 				C672DD9121635DC70082CDE1 /* MeasureState_Handler.swift */,
 				C672DD9321635F1D0082CDE1 /* MeasureState_General.swift */,
 				C672DD9521635F4A0082CDE1 /* MeasureState_StartState.swift */,
 				C672DD9721635FBC0082CDE1 /* MeasureState_WalkingState.swift */,
-				C672DD99216360290082CDE1 /* MeasureState_ManualMeasureState.swift */,
 				C672DD9E2163818A0082CDE1 /* MeasureState_EndState.swift */,
 			);
 			path = MeasureStateHandler;
@@ -452,6 +457,23 @@
 				C6911869214FAE3C00553624 /* SegmentedControl.swift */,
 			);
 			path = UIParts;
+			sourceTree = "<group>";
+		};
+		C6CA8DB2216B51E8002F6092 /* Manual Measurement */ = {
+			isa = PBXGroup;
+			children = (
+				C672DD99216360290082CDE1 /* MeasureState_ManualMeasureState.swift */,
+			);
+			path = "Manual Measurement";
+			sourceTree = "<group>";
+		};
+		C6CA8DB3216B5206002F6092 /* Automatic Measurement */ = {
+			isa = PBXGroup;
+			children = (
+				C6CA8DB4216B5229002F6092 /* MeasureState_SettingState.swift */,
+				C6CA8DB6216B5242002F6092 /* MeasureState_DrawState.swift */,
+			);
+			path = "Automatic Measurement";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -677,6 +699,7 @@
 				C61BEB392147CA5A0042EE12 /* WalkingState.swift in Sources */,
 				C661D40E215D332500D053A1 /* BTreeIndex.swift in Sources */,
 				C672DD9421635F1D0082CDE1 /* MeasureState_General.swift in Sources */,
+				C6CA8DB7216B5242002F6092 /* MeasureState_DrawState.swift in Sources */,
 				C661D417215D332500D053A1 /* BTreeBuilder.swift in Sources */,
 				C661D418215D332500D053A1 /* BTreeCursor.swift in Sources */,
 				C672DD9221635DC70082CDE1 /* MeasureState_Handler.swift in Sources */,
@@ -703,6 +726,7 @@
 				C661D411215D332500D053A1 /* Map.swift in Sources */,
 				C672DD8F21635D220082CDE1 /* MeasureController.swift in Sources */,
 				C661D40D215D332500D053A1 /* BTreeComparisons.swift in Sources */,
+				C6CA8DB5216B5229002F6092 /* MeasureState_SettingState.swift in Sources */,
 				C672DD9821635FBC0082CDE1 /* MeasureState_WalkingState.swift in Sources */,
 				C60BC346215BF56F00CE2E98 /* Undirected Graph.swift in Sources */,
 				C691186A214FAE3C00553624 /* SegmentedControl.swift in Sources */,

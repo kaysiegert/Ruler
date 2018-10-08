@@ -7,10 +7,14 @@
 //
 
 import Foundation
+import SceneKit
 
 internal final class ResultButton: UIButton {
     
     private final let handler: MeasureState_Handler
+    
+    internal final var currentDistance: Float = 0.0
+    internal final var currentLine: (start: SCNVector3, end: SCNVector3) = (SCNVector3Zero, SCNVector3Zero)
     
     init(frame: CGRect, handler: MeasureState_Handler) {
         self.handler = handler
@@ -22,7 +26,7 @@ internal final class ResultButton: UIButton {
     }
     
     override internal final func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("Maß: \(currentDistance) übernommen")
+        print("Maß: \(self.currentDistance) übernommen ==> Laufend von \(self.currentLine.start) nach \(self.currentLine.end)")
         self.handler.currentState = self.handler.endState
     }
 }
