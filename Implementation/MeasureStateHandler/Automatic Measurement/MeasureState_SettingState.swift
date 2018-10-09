@@ -8,6 +8,7 @@
 
 import Foundation
 
+@available(iOS 11.0, *)
 internal final class MeasureState_SettingState: MeasureState_General {
     
 }

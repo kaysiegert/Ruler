@@ -7,7 +7,9 @@
 //
 
 import Foundation
+import UIKit
 
+@available(iOS 11.0, *)
 internal final class CancelButton: UIButton {
     
     private final let handler: MeasureState_Handler

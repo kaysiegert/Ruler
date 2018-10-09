@@ -9,6 +9,7 @@
 import Foundation
 import SceneKit
 
+@available(iOS 11.0, *)
 internal final class ResultButton: UIButton {
     
     private final let handler: MeasureState_Handler

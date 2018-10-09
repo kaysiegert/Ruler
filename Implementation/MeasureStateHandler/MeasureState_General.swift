@@ -9,6 +9,7 @@
 import Foundation
 import ARKit
 
+@available(iOS 11.0, *)
 internal class MeasureState_General {
     
     private final var view: MeasureController? = nil

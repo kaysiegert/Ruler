@@ -319,6 +319,7 @@ private func rayIntersectionWithHorizontalPlane(rayOrigin: SCNVector3, direction
 }
 
 
+@available(iOS 11.0, *)
 extension ARSCNView {
     func worldPositionFromScreenPosition(_ position: CGPoint,
                                          objectPos: SCNVector3?,
@@ -387,6 +388,7 @@ extension ARSCNView {
     
 }
 
+@available(iOS 11.0, *)
 func != (lhs: ARCamera.TrackingState, rhs: ARCamera.TrackingState) -> Bool {
     switch (lhs, rhs) {
     case (ARCamera.TrackingState.normal, ARCamera.TrackingState.normal):
@@ -401,6 +403,7 @@ func != (lhs: ARCamera.TrackingState, rhs: ARCamera.TrackingState) -> Bool {
 }
 
 
+@available(iOS 11.0, *)
 extension ARSCNView {
     
     struct HitTestRay {
@@ -592,8 +595,9 @@ func planeDetectWithFeatureCloud(featureCloud: [SCNVector3]) -> (detectPlane: SC
     let warpFeatures = featureCloud.map({ (feature) -> NSValue in
         return NSValue(scnVector3: feature)
     })
-    let result = PlaneDetector.detectPlane(withPoints: warpFeatures)
     var planePoint = SCNVector3Zero
+    /*
+    let result = PlaneDetector.detectPlane(withPoints: warpFeatures)
     if result.x != 0 {
         planePoint = SCNVector3(result.w/result.x,0,0)
     }else if result.y != 0 {
@@ -603,6 +607,8 @@ func planeDetectWithFeatureCloud(featureCloud: [SCNVector3]) -> (detectPlane: SC
     }
     let detectPlane = SCNVector3(result.x, result.y, result.z)
     return (detectPlane, planePoint)
+     */
+    return (planePoint, planePoint)
 }
 
 /// 根据直线上的点和向量及平面上的点和法向量计算交点

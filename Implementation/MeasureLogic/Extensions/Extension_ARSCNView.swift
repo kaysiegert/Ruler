@@ -9,6 +9,7 @@
 import Foundation
 import ARKit
 
+@available(iOS 11.0, *)
 internal extension ARSCNView {
     
     internal final func worldPositionWithScreenPosition(_ touchPosition: CGPoint,

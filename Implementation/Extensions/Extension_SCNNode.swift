@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ARKit
 
 extension SCNNode: hasUniqueKey {
     var key: Int {

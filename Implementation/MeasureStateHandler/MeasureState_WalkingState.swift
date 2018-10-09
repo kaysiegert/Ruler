@@ -7,7 +7,9 @@
 //
 
 import Foundation
+import UIKit
 
+@available(iOS 11.0, *)
 internal final class MeasureState_WalkingState: MeasureState_General {
     
     override internal final func appaerState() {

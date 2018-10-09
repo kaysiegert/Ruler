@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import ARKit
 
+@available(iOS 11.0, *)
 internal final class MeasureState_Handler {
     
     internal final let startState = MeasureState_StartState.init()
@@ -65,13 +66,13 @@ internal final class MeasureState_Handler {
         var button = CancelButton.init(frame: CGRect.init(), handler: self)
         self.currentState.interact({ (controller) in
             button = CancelButton.init(frame: CGRect(x: controller.viewController.view.frame.size.width-50, y: 10, width: 40, height: 40), handler: self)
-            button.setImage(UIImage.init(named: "Images/btnCancel.png"), for: .normal)
+            button.setImage(UIImage.init(named: "btnCancel.png"), for: .normal)
         })
         return button
     }()
     
     internal final lazy var arrow = { () -> UIImageView in
-        let arrow = UIImageView.init(image: UIImage.init(named: "Images/arrow-top-left.png"))
+        let arrow = UIImageView.init(image: UIImage.init(named: "arrow-top-left.png"))
         arrow.frame = CGRect(x: 5, y: 5, width: arrow.frame.size.width, height: arrow.frame.size.height)
         return arrow
     }()
@@ -94,7 +95,7 @@ internal final class MeasureState_Handler {
         label.numberOfLines = 4;
         label.textAlignment = .center
         label.font = UIFont.init(name: "ArialNarrow-Bold", size: 14)
-        label.text = "Sie können das Maß jetzt übernehmen. Um eine neue Messung zu starten, tippen Sie erneut auf den unteren Bildschirmbereich."
+        label.text = NSLocalizedString("arruler_info_step_1", comment: "")
         return label
     }()
     
@@ -115,7 +116,7 @@ internal final class MeasureState_Handler {
         button.setTitleColor(self.overlay.backgroundColor, for: .normal)
         button.setTitleColor(.white, for: .highlighted)
         button.titleLabel?.font = UIFont.init(name: "ArialNarrow-BoldItalic", size: 18)
-        button.setTitle("Maß übernehmen", for: .normal)
+        button.setTitle(NSLocalizedString("arruler_btn_accept", comment: ""), for: .normal)
         button.isEnabled = false
         return button
     }()
@@ -126,7 +127,7 @@ internal final class MeasureState_Handler {
         label.textColor = .darkGray
         label.textAlignment = .center
         label.font = UIFont.init(name: "ArialNarrow", size: 12)
-        label.text = "Bitte beachten Sie, dass es sich um etwaige Werte handelt."
+        label.text = NSLocalizedString("arruler_notice", comment: "")
         return label
     }()
     
@@ -134,7 +135,7 @@ internal final class MeasureState_Handler {
         var gesture = UIImageView.init()
         self.currentState.interact({ (controller) in
             gesture = UIImageView.init(frame: CGRect(x: 0, y: controller.viewController.view.frame.size.height / 2, width: controller.viewController.view.frame.size.width, height: controller.viewController.view.frame.size.height / 2))
-            gesture.image = UIImage.init(named: "Images/tapGesture.png")
+            gesture.image = UIImage.init(named: "tapGesture.png")
             gesture.contentMode = .center
         })
         return gesture

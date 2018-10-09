@@ -7,7 +7,10 @@
 //
 
 import Foundation
+import ARKit
+import UIKit
 
+@available(iOS 11.0, *)
 internal final class MeasureState_ManualMeasureState: MeasureState_General {
  
     private final var timer = Timer.init()
