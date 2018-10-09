@@ -15,9 +15,9 @@ internal final class MeasureController: NSObject {
     internal final let handler = MeasureState_Handler.init()
     internal final let viewController: UIViewController & ARSCNViewDelegate
     
-    private var firstCall = true
+    private final var firstCall = true
     
-    internal final func setupMeasurement() {
+    @objc internal final func setupMeasurement() {
         if self.firstCall {
             _ = self.handler.startState.register(controller: self)
             _ = self.handler.walkingState.register(controller: self)
