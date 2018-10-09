@@ -22,6 +22,7 @@ internal final class MeasureController: NSObject {
             _ = self.handler.startState.register(controller: self)
             _ = self.handler.walkingState.register(controller: self)
             _ = self.handler.manualMeasurementState.register(controller: self)
+            _ = self.handler.automaticMeasurementDrawState.register(controller: self)
             _ = self.handler.endState.register(controller: self)
             self.firstCall = false
         } else {

@@ -49,7 +49,7 @@ internal final class MeasureState_StartState: MeasureState_General {
     
     override internal final func handleTouchesBegan(at point: CGPoint) {
         self.interact { (controller) in
-            controller.handler.currentState = controller.handler.manualMeasurementState
+            controller.handler.currentState = controller.handler.automaticMeasurementDrawState
         }
     }
 }

@@ -10,4 +10,14 @@ import Foundation
 
 internal final class MeasureState_DrawState: MeasureState_General {
     
+    override func appaerState() {
+        print("Draw")
+    }
+    
+    override internal final func handleTouchesBegan(at point: CGPoint) {
+        self.interact { (controller) in
+            let r = controller.handler.sceneView.worldPositionFromScreenPosition(point, objectPos: nil)
+            print(r)
+        }
+    }
 }

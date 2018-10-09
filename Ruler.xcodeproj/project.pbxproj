@@ -97,6 +97,8 @@
 		C672DDA42163B7B00082CDE1 /* CancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C672DDA32163B7B00082CDE1 /* CancelButton.swift */; };
 		C672DDA62163B9E60082CDE1 /* TapGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C672DDA52163B9E60082CDE1 /* TapGestureView.swift */; };
 		C67364B8216C9E1B001179BD /* MeasureAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67364B7216C9E1B001179BD /* MeasureAppDelegate.swift */; };
+		C67364BF216CA5E8001179BD /* Extension_Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67364BE216CA5E8001179BD /* Extension_Array.swift */; };
+		C67364C1216CB418001179BD /* Extension_ARSCNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67364C0216CB418001179BD /* Extension_ARSCNView.swift */; };
 		C6911862214F964A00553624 /* World  .swift in Sources */ = {isa = PBXBuildFile; fileRef = C6911861214F964A00553624 /* World  .swift */; };
 		C6911864214F9C9C00553624 /* MeasuringState2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6911863214F9C9C00553624 /* MeasuringState2.swift */; };
 		C6911867214FA9D600553624 /* UISegementedControl Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6911866214FA9D600553624 /* UISegementedControl Extension.swift */; };
@@ -193,6 +195,8 @@
 		C672DDA32163B7B00082CDE1 /* CancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButton.swift; sourceTree = "<group>"; };
 		C672DDA52163B9E60082CDE1 /* TapGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureView.swift; sourceTree = "<group>"; };
 		C67364B7216C9E1B001179BD /* MeasureAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureAppDelegate.swift; sourceTree = "<group>"; };
+		C67364BE216CA5E8001179BD /* Extension_Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_Array.swift; sourceTree = "<group>"; };
+		C67364C0216CB418001179BD /* Extension_ARSCNView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_ARSCNView.swift; sourceTree = "<group>"; };
 		C6911861214F964A00553624 /* World  .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "World  .swift"; sourceTree = "<group>"; };
 		C6911863214F9C9C00553624 /* MeasuringState2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasuringState2.swift; sourceTree = "<group>"; };
 		C6911866214FA9D600553624 /* UISegementedControl Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegementedControl Extension.swift"; sourceTree = "<group>"; };
@@ -362,7 +366,6 @@
 			children = (
 				C61BEB442147F1110042EE12 /* PlaneDetector.mm */,
 				C61BEB412147F0C30042EE12 /* Ruler-Bridging-Header.h */,
-				C61BEB462147F12A0042EE12 /* ARHitTest.swift */,
 				C61BEB482147F3260042EE12 /* PlaneDetector.h */,
 			);
 			path = MeasureLogic;
@@ -394,6 +397,7 @@
 		C672DD8D21635CDD0082CDE1 /* Implementation */ = {
 			isa = PBXGroup;
 			children = (
+				C67364B9216CA54C001179BD /* MeasureLogic */,
 				C672DD9B2163644F0082CDE1 /* Extensions */,
 				C6911860214F962D00553624 /* WorldModel */,
 				C672DD9021635DB00082CDE1 /* MeasureStateHandler */,
@@ -434,6 +438,24 @@
 				C672DDA52163B9E60082CDE1 /* TapGestureView.swift */,
 			);
 			path = UserInterface;
+			sourceTree = "<group>";
+		};
+		C67364B9216CA54C001179BD /* MeasureLogic */ = {
+			isa = PBXGroup;
+			children = (
+				C67364BD216CA5D6001179BD /* Extensions */,
+			);
+			path = MeasureLogic;
+			sourceTree = "<group>";
+		};
+		C67364BD216CA5D6001179BD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C67364C0216CB418001179BD /* Extension_ARSCNView.swift */,
+				C67364BE216CA5E8001179BD /* Extension_Array.swift */,
+				C61BEB462147F12A0042EE12 /* ARHitTest.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		C6911860214F962D00553624 /* WorldModel */ = {
@@ -721,6 +743,7 @@
 				C6911864214F9C9C00553624 /* MeasuringState2.swift in Sources */,
 				C6911862214F964A00553624 /* World  .swift in Sources */,
 				C61BEAFD2147BDBD0042EE12 /* AppDelegate.swift in Sources */,
+				C67364BF216CA5E8001179BD /* Extension_Array.swift in Sources */,
 				C61BEB302147C92C0042EE12 /* StartState.swift in Sources */,
 				C67364B8216C9E1B001179BD /* MeasureAppDelegate.swift in Sources */,
 				C661D412215D332500D053A1 /* BTreeMerger.swift in Sources */,
@@ -738,6 +761,7 @@
 				C672DD9621635F4A0082CDE1 /* MeasureState_StartState.swift in Sources */,
 				C661D3F1215CE35C00D053A1 /* Undirected   Graph.swift in Sources */,
 				C661D42D215E0DEA00D053A1 /* Undirected     Graph.swift in Sources */,
+				C67364C1216CB418001179BD /* Extension_ARSCNView.swift in Sources */,
 				C661D40A215D332500D053A1 /* BTreePath.swift in Sources */,
 				C6B8972721510FD2006F5EC0 /* ARSCNViewPersonal Extension.swift in Sources */,
 				C61BEB472147F12A0042EE12 /* ARHitTest.swift in Sources */,

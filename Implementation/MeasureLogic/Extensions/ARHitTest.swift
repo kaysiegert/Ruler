@@ -11,28 +11,6 @@ import UIKit
 import SceneKit
 import ARKit
 
-extension Array where Iterator.Element == SCNVector3 {
-    var average: SCNVector3? {
-        guard !isEmpty else {
-            return nil
-        }
-        
-        var ret = self.reduce(SCNVector3Zero) { (cur, next) -> SCNVector3 in
-            var cur = cur
-            cur.x += next.x
-            cur.y += next.y
-            cur.z += next.z
-            return cur
-        }
-        let fcount = Float(count)
-        ret.x /= fcount
-        ret.y /= fcount
-        ret.z /= fcount
-        
-        return ret
-    }
-}
-
 
 // MARK: - SCNNode extension
 extension SCNNode {
