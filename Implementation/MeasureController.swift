@@ -18,6 +18,7 @@ internal final class MeasureController: NSObject {
     private final var firstCall = true
     
     @objc internal final func setupMeasurement() {
+        // test
         if self.firstCall {
             _ = self.handler.startState.register(controller: self)
             _ = self.handler.walkingState.register(controller: self)
