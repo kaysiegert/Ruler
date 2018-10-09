@@ -24,6 +24,9 @@ internal final class MeasureController: NSObject {
             _ = self.handler.manualMeasurementState.register(controller: self)
             _ = self.handler.endState.register(controller: self)
             self.firstCall = false
+        } else {
+            let configuration = ARWorldTrackingConfiguration.init()
+            self.handler.sceneView.session.run(configuration)
         }
         self.handler.currentState = self.handler.startState
     }

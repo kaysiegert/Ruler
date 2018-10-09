@@ -29,6 +29,8 @@ internal final class MeasureState_EndState: MeasureState_General {
                 handler.overlay.removeFromSuperview()
                 handler.tapGestureImageView.removeFromSuperview()
             })
+            
+            controller.handler.sceneView.session.pause()
         }
     }
 }

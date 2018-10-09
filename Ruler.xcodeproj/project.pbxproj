@@ -96,6 +96,7 @@
 		C672DDA22163B5BE0082CDE1 /* ResultButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C672DDA12163B5BE0082CDE1 /* ResultButton.swift */; };
 		C672DDA42163B7B00082CDE1 /* CancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C672DDA32163B7B00082CDE1 /* CancelButton.swift */; };
 		C672DDA62163B9E60082CDE1 /* TapGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C672DDA52163B9E60082CDE1 /* TapGestureView.swift */; };
+		C67364B8216C9E1B001179BD /* MeasureAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67364B7216C9E1B001179BD /* MeasureAppDelegate.swift */; };
 		C6911862214F964A00553624 /* World  .swift in Sources */ = {isa = PBXBuildFile; fileRef = C6911861214F964A00553624 /* World  .swift */; };
 		C6911864214F9C9C00553624 /* MeasuringState2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6911863214F9C9C00553624 /* MeasuringState2.swift */; };
 		C6911867214FA9D600553624 /* UISegementedControl Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6911866214FA9D600553624 /* UISegementedControl Extension.swift */; };
@@ -191,6 +192,7 @@
 		C672DDA12163B5BE0082CDE1 /* ResultButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultButton.swift; sourceTree = "<group>"; };
 		C672DDA32163B7B00082CDE1 /* CancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButton.swift; sourceTree = "<group>"; };
 		C672DDA52163B9E60082CDE1 /* TapGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureView.swift; sourceTree = "<group>"; };
+		C67364B7216C9E1B001179BD /* MeasureAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureAppDelegate.swift; sourceTree = "<group>"; };
 		C6911861214F964A00553624 /* World  .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "World  .swift"; sourceTree = "<group>"; };
 		C6911863214F9C9C00553624 /* MeasuringState2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasuringState2.swift; sourceTree = "<group>"; };
 		C6911866214FA9D600553624 /* UISegementedControl Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegementedControl Extension.swift"; sourceTree = "<group>"; };
@@ -396,6 +398,7 @@
 				C6911860214F962D00553624 /* WorldModel */,
 				C672DD9021635DB00082CDE1 /* MeasureStateHandler */,
 				C672DD8E21635D220082CDE1 /* MeasureController.swift */,
+				C67364B7216C9E1B001179BD /* MeasureAppDelegate.swift */,
 			);
 			path = Implementation;
 			sourceTree = "<group>";
@@ -719,6 +722,7 @@
 				C6911862214F964A00553624 /* World  .swift in Sources */,
 				C61BEAFD2147BDBD0042EE12 /* AppDelegate.swift in Sources */,
 				C61BEB302147C92C0042EE12 /* StartState.swift in Sources */,
+				C67364B8216C9E1B001179BD /* MeasureAppDelegate.swift in Sources */,
 				C661D412215D332500D053A1 /* BTreeMerger.swift in Sources */,
 				C661D3EB215CA76900D053A1 /* Undirected  Graph.swift in Sources */,
 				C672DDA42163B7B00082CDE1 /* CancelButton.swift in Sources */,
